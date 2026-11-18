@@ -16,7 +16,7 @@ export class AppModule {}
 
 test('adds the module to an empty imports array, after the last import', () => {
   const out = addModule(fresh)
-  assert.match(out, /import \{ AppService \} from '\.\/app\.service';\nimport \{ VigieModule \} from '@vigie\/nestjs';\n/)
+  assert.match(out, /import \{ AppService \} from '\.\/app\.service';\nimport \{ VigieModule \} from '@vigiejs\/nestjs';\n/)
   assert.match(out, /imports: \[VigieModule\.forRoot\(\)\]/)
 })
 
@@ -33,7 +33,7 @@ test('creates imports when the module has none, and runs once', () => {
 
 test('register goes first, once', () => {
   const out = addRegister("import { NestFactory } from '@nestjs/core';\n")
-  assert.ok(out.startsWith("import '@vigie/nestjs/register';\n"))
+  assert.ok(out.startsWith("import '@vigiejs/nestjs/register';\n"))
   assert.equal(addRegister(out), out)
 })
 

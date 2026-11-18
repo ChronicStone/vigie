@@ -4,7 +4,7 @@ import { createLoggerStorage } from 'evlog/toolkit/storage'
 
 const { storage, useLogger } = createLoggerStorage(
   'execution context. Import VigieModule.forRoot(), or wrap the work in task() or runWithWideEvent().',
-  '@vigie/nestjs:execution',
+  '@vigiejs/nestjs:execution',
 )
 
 /** The trace and span of the current OpenTelemetry span, so Vigie can join an event to its trace. */

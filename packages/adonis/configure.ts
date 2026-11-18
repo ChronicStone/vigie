@@ -77,7 +77,7 @@ async function sendTestEvent(vigie: Found, key: string, service: string) {
 }
 
 /**
- * `node ace add @vigie/adonis`, or `node ace configure @vigie/adonis --url=https://vigie.acme.com --key=vg_…` in CI.
+ * `node ace add @vigiejs/adonis`, or `node ace configure @vigiejs/adonis --url=https://vigie.acme.com --key=vg_…` in CI.
  */
 export async function configure(command: Configure) {
   const flags = command.parsedFlags as { url?: string; key?: string }
@@ -117,9 +117,9 @@ export async function configure(command: Configure) {
   // Created only now: codemods read the files once, and the step above just changed them.
   const codemods = await command.createCodemods()
   await codemods.makeUsingStub(stubsRoot, 'config/vigie.stub', {})
-  await codemods.updateRcFile((rc) => rc.addProvider('@vigie/adonis/vigie_provider'))
+  await codemods.updateRcFile((rc) => rc.addProvider('@vigiejs/adonis/vigie_provider'))
   // The server stack runs for every request, so a 404 is recorded too.
-  await codemods.registerMiddleware('server', [{ path: '@vigie/adonis/vigie_middleware', position: 'after' }])
+  await codemods.registerMiddleware('server', [{ path: '@vigiejs/adonis/vigie_middleware', position: 'after' }])
   await codemods.defineEnvVariables({ VIGIE_URL: vigie.url, VIGIE_KEY: key }, { omitFromExample: ['VIGIE_KEY'] })
   await codemods.defineEnvValidations({
     leadingComment: 'Where this app sends its telemetry. Leave VIGIE_URL empty to send nothing, as in tests.',
@@ -140,6 +140,6 @@ export async function configure(command: Configure) {
     command.logger.log(`  Start the app: each request now shows up at ${vigie.url}/logs`)
   } else {
     const why = sent.status === 401 ? 'Vigie refused the ingest key.' : sent.status ? `Vigie answered ${sent.status}.` : `Vigie did not answer at ${vigie.url}.`
-    command.logger.warning(`${why} The app is set up; fix VIGIE_URL or VIGIE_KEY in .env, then run node ace configure @vigie/adonis again.`)
+    command.logger.warning(`${why} The app is set up; fix VIGIE_URL or VIGIE_KEY in .env, then run node ace configure @vigiejs/adonis again.`)
   }
 }

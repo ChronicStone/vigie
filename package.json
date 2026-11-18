@@ -1,7 +1,6 @@
 {
   "name": "vigie",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "Self-hosted telemetry for Node apps: logs, traces, tasks, alerts, a status page and MCP, on OpenTelemetry and ClickHouse.",
   "bin": {

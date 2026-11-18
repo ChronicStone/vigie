@@ -1,7 +1,7 @@
 {
-  "name": "@vigie/adonis",
+  "name": "@vigiejs/adonis",
   "version": "0.1.0",
-  "description": "Send an Adonis app's requests, errors and tasks to Vigie, with one command: node ace add @vigie/adonis",
+  "description": "Send an Adonis app's requests, errors and tasks to Vigie, with one command: node ace add @vigiejs/adonis",
   "license": "MIT",
   "type": "module",
   "files": [

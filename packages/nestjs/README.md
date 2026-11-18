@@ -1,9 +1,9 @@
-# @vigie/nestjs
+# @vigiejs/nestjs
 
 Sends a NestJS app's requests, errors, traces and background jobs to [Vigie](https://github.com/ChronicStone/vigie), self-hosted telemetry you run yourself.
 
 ```sh
-npx @vigie/nestjs init
+npx @vigiejs/nestjs init
 ```
 
 That is the whole setup. It installs the package, finds the Vigie running on your machine (or asks where yours runs), adds two lines to your app, writes `VIGIE_URL` and `VIGIE_KEY` to `.env`, and sends a test event. With a Vigie on a server, it opens a page where someone signed in allows the app: nobody copies a key.
@@ -11,14 +11,14 @@ That is the whole setup. It installs the package, finds the Vigie running on you
 In CI, or anywhere without a browser:
 
 ```sh
-npx @vigie/nestjs init --url=https://vigie.acme.dev --key=vk_…
+npx @vigiejs/nestjs init --url=https://vigie.acme.dev --key=vk_…
 ```
 
 ## The two lines
 
 ```ts
 // src/main.ts: first line, so traces start before Nest loads
-import '@vigie/nestjs/register'
+import '@vigiejs/nestjs/register'
 ```
 
 ```ts
@@ -34,7 +34,7 @@ export class AppModule {}
 Every request becomes one wide event: method, the route as written in the controller (`/orders/:id/checkout`), the handler (`OrdersController.checkout`), status, outcome, duration, the signed-in user's id, and its trace. A 404 is recorded too. Add what matters to you from anywhere in the request:
 
 ```ts
-import { useLogger } from '@vigie/nestjs'
+import { useLogger } from '@vigiejs/nestjs'
 
 @Post(':id/checkout')
 async checkout(@Param('id') id: string) {
@@ -47,7 +47,7 @@ async checkout(@Param('id') id: string) {
 Background work goes through `@VigieTask`. On a BullMQ or Bull processor, the job's id, attempt, queue and wait time come from the job itself. Throwing marks the attempt failed; `skipTask()` and `retryTask()` say why it did not run:
 
 ```ts
-import { skipTask, useLogger, VigieTask } from '@vigie/nestjs'
+import { skipTask, useLogger, VigieTask } from '@vigiejs/nestjs'
 
 @Processor('emails')
 export class EmailsProcessor extends WorkerHost {

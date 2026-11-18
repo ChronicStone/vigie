@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * `npx @vigie/nestjs init`: everything a Nest app needs to send its telemetry to Vigie.
- * In CI: `npx @vigie/nestjs init --url=https://vigie.acme.dev --key=vk_…`.
+ * `npx @vigiejs/nestjs init`: everything a Nest app needs to send its telemetry to Vigie.
+ * In CI: `npx @vigiejs/nestjs init --url=https://vigie.acme.dev --key=vk_…`.
  */
 import { spawn, spawnSync } from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -106,11 +106,11 @@ function packageManager() {
   return { name: 'npm', add: ['install'] }
 }
 
-/** Puts `import '@vigie/nestjs/register'` first in main.ts, so tracing starts before Nest loads. */
+/** Puts `import '@vigiejs/nestjs/register'` first in main.ts, so tracing starts before Nest loads. */
 export function addRegister(source: string) {
-  if (source.includes('@vigie/nestjs/register')) return source
+  if (source.includes('@vigiejs/nestjs/register')) return source
   const semi = /from ['"][^'"]+['"];/.test(source) ? ';' : ''
-  return `import '@vigie/nestjs/register'${semi}\n${source}`
+  return `import '@vigiejs/nestjs/register'${semi}\n${source}`
 }
 
 /** The text range of the object passed to `@Module(…)`, braces included, skipping strings and comments. */
@@ -165,7 +165,7 @@ export function addModule(source: string) {
 
   const quote = /from "/.test(source) ? '"' : "'"
   const semi = /from ['"][^'"]+['"];/.test(source) ? ';' : ''
-  const importLine = `import { VigieModule } from ${quote}@vigie/nestjs${quote}${semi}\n`
+  const importLine = `import { VigieModule } from ${quote}@vigiejs/nestjs${quote}${semi}\n`
   let next: string
   if (found) {
     const at = found.value + 1
@@ -201,12 +201,12 @@ async function main() {
   if (!pkg.dependencies?.['@nestjs/core']) throw new Error('This is not a Nest app: @nestjs/core is not in its dependencies.')
   const service = process.env.OTEL_SERVICE_NAME ?? pkg.name?.replace(/^@[^/]+\//, '') ?? 'app'
 
-  if (!pkg.dependencies['@vigie/nestjs'] && flags['no-install'] !== 'true') {
+  if (!pkg.dependencies['@vigiejs/nestjs'] && flags['no-install'] !== 'true') {
     const pm = packageManager()
-    const spec = process.env.VIGIE_NESTJS_SPEC ?? '@vigie/nestjs'
-    console.log(`Installing @vigie/nestjs with ${pm.name}…`)
+    const spec = process.env.VIGIE_NESTJS_SPEC ?? '@vigiejs/nestjs'
+    console.log(`Installing @vigiejs/nestjs with ${pm.name}…`)
     const result = spawnSync(pm.name, [...pm.add, spec], { cwd, stdio: 'inherit', shell: process.platform === 'win32' })
-    if (result.status !== 0) throw new Error(`${pm.name} could not install @vigie/nestjs.`)
+    if (result.status !== 0) throw new Error(`${pm.name} could not install @vigiejs/nestjs.`)
   }
 
   let vigie: Found | null = null
@@ -226,7 +226,7 @@ async function main() {
   const main = ['src/main.ts', 'src/main.js'].map((file) => join(cwd, file)).find(existsSync)
   const root = ['src/app.module.ts', 'src/app.module.js'].map((file) => join(cwd, file)).find(existsSync)
   if (main && edit(main, addRegister)) ok('Traces start first in src/main.ts')
-  else if (!main) warn("No src/main.ts: add import '@vigie/nestjs/register' at the top of your entry file.")
+  else if (!main) warn("No src/main.ts: add import '@vigiejs/nestjs/register' at the top of your entry file.")
   if (!root) warn('No src/app.module.ts: add VigieModule.forRoot() to your root module imports.')
   else {
     try {
@@ -257,7 +257,7 @@ async function main() {
 const invoked = process.argv[1] && /init\.(js|ts)$|vigie-nestjs$/.test(process.argv[1])
 if (invoked) {
   if (process.argv[2] && process.argv[2] !== 'init' && !process.argv[2].startsWith('--')) {
-    console.log('Usage: npx @vigie/nestjs init [--url=https://vigie.acme.dev] [--key=vk_…] [--no-install]')
+    console.log('Usage: npx @vigiejs/nestjs init [--url=https://vigie.acme.dev] [--key=vk_…] [--no-install]')
     process.exit(1)
   }
   main().catch((error: Error) => {

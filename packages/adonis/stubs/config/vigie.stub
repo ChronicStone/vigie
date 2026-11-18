@@ -2,7 +2,7 @@
   exports({ to: app.configPath('vigie.ts') })
 }}}
 import env from '#start/env'
-import { defineConfig } from '@vigie/adonis'
+import { defineConfig } from '@vigiejs/adonis'
 
 /**
  * Every request becomes one wide event in Vigie: route, status, duration, user and

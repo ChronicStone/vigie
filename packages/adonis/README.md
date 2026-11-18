@@ -1,9 +1,9 @@
-# @vigie/adonis
+# @vigiejs/adonis
 
 Sends an Adonis app's requests, errors and background tasks to [Vigie](../../README.md), self-hosted telemetry for Adonis apps.
 
 ```sh
-node ace add @vigie/adonis
+node ace add @vigiejs/adonis
 ```
 
 That is the whole setup. It finds the Vigie running on your machine (or asks where yours runs), sets up traces with the official `@adonisjs/otel`, registers one middleware, writes `VIGIE_URL` and `VIGIE_KEY`, and sends a test event. With a Vigie on a server, it opens a page where someone signed in allows the app: nobody copies a key.
@@ -11,7 +11,7 @@ That is the whole setup. It finds the Vigie running on your machine (or asks whe
 In CI, or anywhere without a browser:
 
 ```sh
-node ace configure @vigie/adonis --url=https://vigie.acme.com --key=vk_…
+node ace configure @vigiejs/adonis --url=https://vigie.acme.com --key=vk_…
 ```
 
 ## What you get
@@ -29,7 +29,7 @@ router.post('/orders', async ({ request, log }) => {
 Background work goes through `task()`. Throwing marks the attempt failed; `skip()` and `retry()` say why it did not run:
 
 ```ts
-import { task } from '@vigie/adonis'
+import { task } from '@vigiejs/adonis'
 
 await task({ kind: 'invoices.sync', id: job.id, attempt: job.attempts, integration: 'stripe' }, async ({ log, skip }) => {
   if (!account.stripeId) return skip('NO_STRIPE_ACCOUNT')

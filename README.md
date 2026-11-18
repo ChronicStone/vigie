@@ -31,8 +31,8 @@ Vigie is now on `http://localhost:5310`, with a day of demo telemetry from a mad
 Then connect your app:
 
 ```sh
-node ace add @vigie/adonis      # Adonis
-npx @vigie/nestjs init          # NestJS
+node ace add @vigiejs/adonis      # Adonis
+npx @vigiejs/nestjs init          # NestJS
 ```
 
 The installer finds Vigie, sets up traces, writes `VIGIE_URL` and `VIGIE_KEY`, and sends a test event. On a server, it opens a page where someone signed in allows the app, so nobody copies a key.
@@ -105,8 +105,8 @@ Docker, ClickHouse and HTTPS from Caddy. It prints the setup code for the first 
 | Package | |
 |---|---|
 | [`vigie`](.) | The server, the app and the CLI. |
-| [`@vigie/adonis`](packages/adonis) | `node ace add @vigie/adonis` |
-| [`@vigie/nestjs`](packages/nestjs) | `npx @vigie/nestjs init` |
+| [`@vigiejs/adonis`](packages/adonis) | `node ace add @vigiejs/adonis` |
+| [`@vigiejs/nestjs`](packages/nestjs) | `npx @vigiejs/nestjs init` |
 
 ## Develop
 

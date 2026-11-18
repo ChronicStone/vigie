@@ -3,7 +3,7 @@
  * Import it first in main.ts, before anything else loads:
  *
  * ```ts
- * import '@vigie/nestjs/register'
+ * import '@vigiejs/nestjs/register'
  * ```
  */
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node'

@@ -1,7 +1,7 @@
 {
-  "name": "@vigie/nestjs",
+  "name": "@vigiejs/nestjs",
   "version": "0.1.0",
-  "description": "Send a NestJS app's requests, errors, traces and background jobs to Vigie, with one command: npx @vigie/nestjs init",
+  "description": "Send a NestJS app's requests, errors, traces and background jobs to Vigie, with one command: npx @vigiejs/nestjs init",
   "license": "MIT",
   "type": "module",
   "files": [

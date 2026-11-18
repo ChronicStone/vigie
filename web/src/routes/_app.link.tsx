@@ -11,7 +11,7 @@ import { ENV_LABEL } from "@web/lib/scope.ts";
 
 export const Route = createFileRoute("/_app/link")({ validateSearch: z.object({ code: z.string().catch("") }), component: LinkPage });
 
-/** The page `node ace add @vigie/adonis` opens: allow one app to send telemetry, without copying a key. */
+/** The page `node ace add @vigiejs/adonis` opens: allow one app to send telemetry, without copying a key. */
 function LinkPage() {
   const { code } = Route.useSearch();
   const q = useFn(pendingLinkFn, { code }, { refetchInterval: false });

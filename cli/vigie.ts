@@ -143,8 +143,8 @@ const commands: Record<string, () => Promise<void>> = {
     }
     console.log(`\n${bold("Vigie is ready")} on http://localhost:${uiPort}`);
     console.log(`  Definitions  ${definitions}`);
-    console.log(`  Adonis       ${bold("node ace add @vigie/adonis")}`);
-    console.log(`  NestJS       ${bold("npx @vigie/nestjs init")}`);
+    console.log(`  Adonis       ${bold("node ace add @vigiejs/adonis")}`);
+    console.log(`  NestJS       ${bold("npx @vigiejs/nestjs init")}`);
     console.log(`  Anything     OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:${ingestPort}\n`);
     await new Promise(() => {});
   },

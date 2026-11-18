@@ -4,7 +4,7 @@ import { createLoggerStorage } from 'evlog/toolkit/storage'
 
 const { storage, useLogger } = createLoggerStorage(
   'execution context. Register the Vigie middleware, or wrap the work in task() or runWithWideEvent().',
-  '@vigie/adonis:execution',
+  '@vigiejs/adonis:execution',
 )
 
 /** The trace and span of the current OpenTelemetry span, so Vigie can join an event to its trace. */
