@@ -1,0 +1,301 @@
+/* How everything moves. Colour and shadow settle softly, position moves by translate and scale only, focus never animates. */
+
+/* ---- Focus: no ring. Keyboard focus reads as the same soft fill as hover, and arrives at once. ---- */
+:focus, :focus-visible { outline: none; }
+:is(.btn, .ib, .ni, .nsb, .fchip, .addf, .pitem, .mitem, .cmdi, .ptab, .seg button, .lvls button, .tgl, .tok, .fv, .fk, .wpick, .dir button, .wtypes button, .dcard, .mapn, .lst, .trow, .lrow, .wr, .tev, .kvr, .same, .wacts a, .wacts button, .ch > a, .ch button, .rdh button, .tbl th button, .fbtn, .bclear):focus-visible { background-color: var(--s3); color: var(--t1); transition-duration: 0s; }
+.lnk:focus-visible { text-decoration: underline; text-underline-offset: 2px; }
+.btn.pri:focus-visible { background-color: var(--t1); color: var(--bg); opacity: .86; }
+.tbl tr:focus-visible td { background: var(--s2); }
+:is(.sb, .finp, .qbar):has(:focus-visible), .input:focus-visible { outline: 1px solid var(--line3); outline-offset: -1px; }
+
+/* ---- Controls and rows: hover arrives quickly and leaves slowly. ---- */
+:is(.btn, .ib, .ni, .nsb, .fchip, .addf, .pitem, .mitem, .cmdi, .ptab, .seg button, .lvls button, .tgl, .tok, .tok .o, .tok .x, .fv, .fk, .wpick, .dir button, .wtypes button, .dcard, .mapn, .lst, .trow, .lrow, .wr, .tev, .kvr, .same, .lnk, .wacts a, .wacts button, .ch > a, .ch button, .rdh button, .tbl th button, .fbtn, .chk, .bclear, .tbl td, .dbgrid td, .sb, .finp, .qbar, .input, .editor, .kvr .val, .ni svg, .kbd) {
+  transition-property: background-color, color, border-color, box-shadow, opacity, translate, scale;
+  transition-duration: var(--dur-short);
+  transition-timing-function: var(--ease-out);
+}
+:is(.btn, .ib, .ni, .fchip, .addf, .pitem, .mitem, .cmdi, .ptab, .seg button, .lvls button, .tgl, .lst, .trow, .lrow, .wr, .tev, .kvr, .lnk, .dcard, .mapn):hover,
+.tbl tr:hover td, .dbgrid tr:hover td { transition-duration: var(--dur-micro); }
+:is(.btn, .ib, .fchip, .addf, .wpick, .wtypes button, .tgl, .dir button):active:not(:disabled) { scale: .975; transition-duration: 60ms; }
+.cmdi, .btn:disabled { transition-duration: var(--dur-micro); }
+
+/* ---- Gliding selection: one shape travels between the choices of a group. ---- */
+.seg, .lvls, .ptabs, .nlist { position: relative; }
+.seg > button, .lvls > button, .ptabs > button, .ptabs > a, .nlist .ni, .nlist .nsb { position: relative; z-index: 1; }
+.seg button.on, .seg:not(.env) button.on, .lvls button.on, .ni.on { background: none; box-shadow: none; }
+.glide { position: absolute; left: 0; top: 0; width: var(--g-sw, 100%); height: var(--g-sh, 100%); z-index: 0; pointer-events: none; background: var(--s1); opacity: var(--g-o, 0); clip-path: inset(var(--g-t, 0) var(--g-r, 0) var(--g-b, 0) var(--g-l, 0) round var(--rad-inner)); }
+.glide.go { transition: clip-path var(--dur-long) var(--ease-out), opacity var(--dur-micro) linear; }
+.nlist > .glide { background: var(--a-soft); clip-path: inset(var(--g-t, 0) var(--g-r, 0) var(--g-b, 0) var(--g-l, 0) round var(--rad-ctl)); }
+.ptabs > .glide { background: var(--a); clip-path: inset(var(--g-t, 0) var(--g-r, 0) var(--g-b, 0) var(--g-l, 0)); }
+
+/* ---- Navigation: active is one quiet shape, groups fold instead of jumping. ---- */
+.ni { height: 30px; border-radius: var(--rad-ctl); }
+.ni:hover { background: var(--s2); }
+.ni.on { color: var(--t1); }
+.ni.on:hover { background: none; }
+.ni.on svg { color: var(--a); opacity: 1; }
+.nscroll { padding-inline: 0; }
+.nsb svg { transition: rotate var(--dur-short) var(--ease-out); }
+.nsb[aria-expanded="false"] svg { rotate: -90deg; }
+.ngrp { display: grid; grid-template-rows: 1fr; transition: grid-template-rows var(--dur-short) var(--ease-out), opacity var(--dur-short) var(--ease-out); }
+.ngrp.shut { grid-template-rows: 0fr; opacity: 0; }
+.ngrp > div { min-height: 0; overflow: clip; }
+
+/* ---- Things that appear: Base UI marks the first and last frame, so leaving animates too. ---- */
+.dlgback { transition: opacity var(--dur-short) var(--ease-out); }
+.dlgback:is([data-starting-style], [data-ending-style]) { opacity: 0; }
+:is(.dlg, .cmdb) { transition: opacity var(--dur-short) var(--ease-out), scale var(--dur-short) var(--ease-out), translate var(--dur-short) var(--ease-out); }
+:is(.dlg, .cmdb)[data-starting-style] { opacity: 0; scale: .985; translate: 0 -6px; }
+:is(.dlg, .cmdb)[data-ending-style] { opacity: 0; scale: .99; transition-duration: var(--dur-micro); transition-timing-function: var(--ease-in); }
+.pop, .tip { transform-origin: var(--transform-origin, top); transition: opacity var(--dur-short) var(--ease-out), scale var(--dur-short) var(--ease-out); }
+:is(.pop, .tip)[data-starting-style] { opacity: 0; scale: .97; }
+:is(.pop, .tip)[data-ending-style] { opacity: 0; scale: .985; transition-duration: var(--dur-micro); }
+.toast { transition: opacity var(--dur-short) var(--ease-out), translate var(--dur-short) var(--ease-out); }
+.toast:is([data-starting-style], [data-ending-style]) { opacity: 0; translate: 0 8px; }
+
+@keyframes panel-in { from { opacity: 0; translate: 12px 0; } }
+@keyframes panel-out { to { opacity: 0; translate: 8px 0; } }
+.panel, .ask { animation: panel-in var(--dur-long) var(--ease-out); }
+.panel[data-leaving], .ask[data-leaving] { animation: panel-out var(--dur-micro) var(--ease-in) forwards; }
+
+@keyframes rise-in { from { opacity: 0; translate: 0 -4px; } }
+.banner { animation: rise-in var(--dur-short) var(--ease-out); }
+
+/* ---- Data arriving: skeletons wait before showing, so a fast answer never flashes one. ---- */
+@keyframes fade-in { from { opacity: 0; } }
+.ov[aria-busy="true"] { animation: fade-in var(--dur-short) var(--ease-out) 120ms backwards; }
+.skel { background: var(--s2); background-image: linear-gradient(90deg, transparent 30%, var(--w-025) 50%, transparent 70%); background-size: 220% 100%; animation: skel 1.8s var(--ease-in-out) infinite; }
+.numin { display: inline-block; animation: fade-in var(--dur-long) var(--ease-out); }
+
+/* ---- Charts and bars grow into place the first time they show. ---- */
+@keyframes grow-x { from { scale: 0 1; } }
+.vchart svg, .vspark svg { animation: fade-in var(--dur-long) var(--ease-out); }
+:is(.dbm i, .hbar span i, .mini i, .pitem .fill, .tdur i) { transform-origin: left center; animation: grow-x var(--dur-long) var(--ease-out); }
+.bsel { animation: fade-in var(--dur-micro) linear; }
+
+/* ---- Live: the only thing that keeps moving, and it breathes. ---- */
+.btn:not(.on) .livedot { display: none; }
+@keyframes breathe { 50% { opacity: .4; } }
+.btn.on .livedot { animation: breathe 2.2s var(--ease-in-out) infinite; }
+
+/* A run strip: quiet when fine, red only for a real failure, a stub for a skip or no run. */
+.strip i { height: 12px; background: var(--a); opacity: .8; }
+.strip i.st-bad { height: 14px; background: var(--err); opacity: 1; }
+.strip i.st-skip { height: 8px; background: var(--t3); opacity: 1; }
+.strip i.st-off { height: 4px; background: var(--s3); opacity: 1; }
+
+/* Ids, trends and sort marks. */
+.idt { font: 11.5px var(--mono); letter-spacing: -.02em; color: var(--t2); padding: 0; transition: color var(--dur-short) var(--ease-out); }
+.idt:hover, .idt:focus-visible { color: var(--t1); }
+.tb { display: flex; align-items: flex-end; gap: 1px; height: 20px; width: 100%; }
+.tb i { flex: 1 1 0; min-width: 0; height: 100%; background: var(--a); border-radius: 1px 1px 0 0; transform-origin: bottom; transition: scale var(--dur-long) var(--ease-out); }
+.tb.err i { background: var(--err); }
+.tb.warn i { background: var(--warn); }
+.tbl th button { position: relative; }
+.sorti { position: absolute; left: 100%; top: 50%; translate: 2px -50%; width: 8px; height: 8px; opacity: 0; transition: opacity var(--dur-short) var(--ease-out), rotate var(--dur-short) var(--ease-out); }
+.sorti.down, .sorti.up { opacity: 1; }
+.sorti.up { rotate: 180deg; }
+
+/* ---- Status reads by word and colour, and healthy stays quiet so failures stand out. ---- */
+.schip i, .lvls .d, .envd { display: none; }
+.schip.ok { color: var(--t3); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, .glide.go { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Key and value: words read as words, values stay mono. */
+.kvr .k { font: 12px var(--sans); letter-spacing: 0; }
+
+/* A task run: what happened, in sentences, above the evidence. */
+.story p { margin: 0; font-size: 14px; line-height: 1.45; max-width: 75ch; }
+.story p.t3 { font-size: 12.5px; }
+.story code { font: 11.5px var(--mono); color: var(--t3); margin-left: 8px; letter-spacing: -.02em; }
+.llist { flex: 1; min-height: 0; overflow: auto; padding: 4px 0; }
+.lline { border-bottom: 1px solid var(--line); }
+.lline > button { display: flex; align-items: center; gap: 12px; width: 100%; height: 36px; padding: 0 20px; text-align: left; transition: background-color var(--dur-short) var(--ease-out); }
+.lline > button:hover, .lline > button:focus-visible { background: var(--s2); transition-duration: var(--dur-micro); }
+.lline > button svg { width: 12px; height: 12px; flex: none; color: var(--t3); rotate: -90deg; transition: rotate var(--dur-short) var(--ease-out); }
+.lline.open > button svg { rotate: 0deg; }
+.lvw { width: 50px; flex: none; font-size: 12px; color: var(--t3); }
+.lv-error { color: var(--err); }
+.lv-warn { color: var(--warn); }
+.lline-body { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-short) var(--ease-out), opacity var(--dur-short) var(--ease-out); }
+.lline-body > div { min-height: 0; overflow: clip; }
+.lline.open .lline-body { grid-template-rows: 1fr; opacity: 1; padding-bottom: 12px; }
+.flds { padding: 0 20px 0 44px; display: grid; gap: 12px; }
+.flds h6 { margin: 0 0 4px; font-size: 12px; font-weight: 500; color: var(--t2); }
+.flds .kvg { grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); }
+.tlink { font-size: 12px; color: var(--t3); transition: color var(--dur-short) var(--ease-out); }
+.tlink:hover, .tlink:focus-visible { color: var(--t1); }
+.lst.sib { padding: 0; height: 28px; border: 0; }
+
+/* Worker slots and row marks stay neutral: green only ever meant "nothing to see". */
+.slots i.on { background: var(--t3); }
+.ptabs { min-height: 38px; align-items: flex-end; }
+
+/* Dashboard cards: a drawing of the dashboard, its name, what is on it. */
+.dcard { display: flex; flex-direction: column; gap: 3px; padding: 10px; }
+.dthumb { display: block; width: 100%; height: 118px; margin-bottom: 8px; padding: 7px; background: var(--well); border-radius: var(--rad-ctl); overflow: hidden; }
+.dname { font-weight: 500; }
+.dwhat { font-size: 12px; display: block; }
+.dcard { transition: background-color var(--dur-short) var(--ease-out), translate var(--dur-short) var(--ease-out); }
+.dcard:hover { translate: 0 -1px; }
+
+/* Process flow: the source sits next to its destinations, not across the page. */
+.flow { grid-template-columns: auto auto minmax(0, 1fr); }
+
+
+.tbl th.num button .sorti { left: auto; right: 100%; translate: -2px -50%; }
+
+/* Which renderer drew a section is a developer detail, not something to read on every panel. */
+.rdh .src { display: none; }
+
+@media (max-width: 760px) {
+  .story { padding: 0 16px 14px; }
+  .flds { padding: 0 16px; }
+  .flds .kvg { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+  .flds .kvr .k { margin-top: 6px; }
+  .flds .kvr .val span:first-child { white-space: normal; overflow-wrap: anywhere; }
+  .lline > button { padding: 0 16px; gap: 8px; }
+  .lline > button .mono.t3.ell { display: none; }
+  .tb { min-width: 80px; }
+}
+
+h2, h3 { text-wrap: balance; }
+.pop { border-color: var(--line); }
+
+/* Slate: the page sits in one inset panel, sections inside it are drawn with a line, never a grey box. */
+html, body, #app { background: var(--bg); }
+#app { padding: 0; grid-template-columns: 216px minmax(0, 1fr); }
+.nav { background: none; border-right: 0; padding: 12px 10px; }
+.main { margin: 8px 8px 8px 0; height: calc(100vh - 16px); background: var(--s1); border: 1px solid var(--line); border-radius: var(--rad-over); }
+.card, .mband { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+.btn { background: var(--raised); border: 1px solid var(--line); color: var(--t2); font-weight: 450; }
+.btn.pri, .btn.pri:hover { background: var(--a); border-color: var(--a); color: var(--ai); font-weight: 550; }
+.btn:hover { color: var(--t1); border-color: var(--line2); }
+.seg { background: var(--raised); box-shadow: 0 0 0 1px var(--line); }
+.seg button { color: var(--t3); font-weight: 450; font-size: 13px; }
+.seg button.on, .seg:not(.env) button.on { color: var(--t1); font-weight: 500; }
+.lvls > .glide { background: var(--raised); }
+.sb, .finp, .qbar, .input { background: var(--raised); border: 1px solid var(--line); }
+.ni { color: var(--t2); font-weight: 450; }
+.mth2, .mth { font: 500 11px var(--mono); }
+.lnk { color: var(--a); }
+.tbl td { border-bottom-color: color-mix(in srgb, var(--line) 60%, transparent); }
+::selection { background: var(--a-soft); }
+
+/* Attention: quiet rows with their evidence, no coloured blocks. */
+.attn { border-bottom: 1px solid var(--line); }
+.ar { display: grid; grid-template-columns: 26px minmax(0, 1fr) 130px 240px 130px 16px; gap: 10px; align-items: center; min-height: 52px; padding: 7px 20px; border-top: 1px solid var(--line); transition: background-color var(--dur-short) var(--ease-out); }
+.ar:hover, .ar:focus-visible { background: var(--s2); transition-duration: var(--dur-micro); }
+.ar > svg:first-child { color: var(--t3); }
+.ar.err > svg:first-child { color: var(--err); }
+.ar.warn > svg:first-child { color: var(--warn); }
+.ar .tt { font-weight: 500; }
+.ar .go { rotate: -90deg; color: var(--t3); }
+.ar .fact { color: var(--t2); }
+@media (max-width: 1180px) { .ar { grid-template-columns: 26px minmax(0, 1fr) 16px; } .ar > .tb, .ar .fact, .ar .when { display: none; } }
+
+/* The system on one clock: every layer on the same time axis, so what happened together lines up. */
+.lr { display: grid; grid-template-columns: 160px minmax(0, 1fr) 76px 76px 76px; align-items: center; }
+.lr.head { height: 30px; font-size: 12.5px; color: var(--t3); }
+.lr.row { height: 76px; border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.ln { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.ln > svg { color: var(--t3); }
+.ln .nm { font-weight: 500; }
+.ln .sm { font-size: 12.5px; color: var(--t3); }
+.lane { height: 100%; display: flex; align-items: flex-end; padding: 8px 0 3px; min-width: 0; }
+.lane .vchart { width: 100%; }
+.lr .r { text-align: right; font-variant-numeric: tabular-nums; }
+.xax { position: relative; height: 16px; font-size: 11.5px; }
+.xax span { position: absolute; top: 0; }
+
+/* A process as it really flows: where its instances got to. */
+.biz2 { display: grid; grid-template-columns: minmax(0, 1fr) 310px; }
+.pipe { padding: 14px 20px; min-width: 0; }
+.ph3 { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ph3 h3 { margin: 0; font-size: 14px; font-weight: 550; letter-spacing: -.01em; }
+.pf2 { display: flex; align-items: center; }
+.psrc { width: 180px; flex: none; padding: 8px 12px; background: var(--raised); border-radius: var(--rad-card); }
+.psrc b { display: block; font-size: 24px; font-weight: 550; letter-spacing: -.02em; line-height: 1.2; }
+.pdst { flex: 1; min-width: 0; }
+.pdst a { display: grid; grid-template-columns: 240px minmax(0, 1fr) 90px 34px; gap: 12px; align-items: center; height: 26px; border-radius: var(--rad-inner); transition: background-color var(--dur-short) var(--ease-out); }
+.pdst a:hover { background: var(--s2); }
+.ptrack { height: 6px; border-radius: 3px; background: var(--raised); overflow: hidden; }
+.ptrack i { display: block; height: 100%; background: var(--a); border-radius: 3px; transform-origin: left center; animation: grow-x var(--dur-long) var(--ease-out); }
+.oth { border-left: 1px solid var(--line); padding: 14px 20px; }
+.ol { display: flex; justify-content: space-between; align-items: center; height: 31px; border-top: 1px solid var(--line); }
+.bdg { display: inline-flex; align-items: center; height: 21px; padding: 0 7px; border-radius: 5px; font-size: 12px; font-weight: 500; white-space: nowrap; flex: none; }
+.bdg.warn { color: var(--warn); background: var(--warn-soft); }
+.bdg.err { color: var(--err); background: var(--err-soft); }
+.bdg.ok { color: var(--ok); background: color-mix(in srgb, var(--ok) 13%, transparent); }
+.bdg.n { color: var(--t2); background: var(--raised); }
+@media (max-width: 1100px) { .biz2 { grid-template-columns: minmax(0, 1fr); } .oth { border-left: 0; border-top: 1px solid var(--line); } .pdst a { grid-template-columns: minmax(0, 1fr) 60px 30px; } .pdst .ptrack { display: none; } .lr { grid-template-columns: 110px minmax(0, 1fr) 64px; } .lr > .r:nth-child(n + 4) { display: none; } }
+
+.ovp { flex: 1; min-height: 0; overflow: auto; }
+.ovp .ol, .pdst a, .ar { cursor: pointer; }
+
+.ar > svg:first-child, .ln > svg { width: 16px; height: 16px; flex: none; }
+.ar.err, .ar.warn { color: var(--t1); }
+.ar.err .tt, .ar.warn .tt { color: var(--t1); }
+.lr.row { height: 84px; }
+.btn.srch { min-width: 190px; color: var(--t3); }
+.btn.srch .kbd { margin-left: auto; }
+
+/* Logs: filters live in a rail, the list gets the room. */
+.lg3 { flex: 1; display: grid; grid-template-columns: 180px minmax(0, 1fr); min-height: 0; }
+.fac { border-right: 1px solid var(--line); padding: 14px 10px; overflow: auto; }
+.fg { margin-bottom: 16px; }
+.fh { font-size: 12.5px; color: var(--t3); padding: 0 8px 4px; }
+.fi { display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%; height: 28px; padding: 0 8px; border-radius: var(--rad-ctl); color: var(--t2); text-align: left; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.fi:hover, .fi:focus-visible { background: var(--s2); transition-duration: var(--dur-micro); }
+.fi.on { background: var(--a-soft); color: var(--t1); font-weight: 500; }
+.fi em { font-style: normal; color: var(--t3); font-size: 12.5px; font-weight: 400; }
+.lcol { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.lcol .lbar { padding: 12px 16px 8px; flex: none; }
+.lcol .spine { border-top: 0; }
+.lrow { min-height: 36px; }
+
+/* Task health: every kind on the same clock. */
+.vl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.vl > div { padding: 12px 20px; min-width: 0; }
+.vl > div + div { border-left: 1px solid var(--line); }
+.vl p { margin: 2px 0; font-weight: 500; }
+.wait { display: flex; align-items: center; gap: 16px; padding: 6px 20px; border-bottom: 1px solid var(--line); }
+.kbar { display: flex; align-items: center; gap: 8px; padding: 10px 20px; }
+.klane { padding: 8px 0 3px; min-width: 240px; }
+.kn { min-width: 0; max-width: 240px; }
+.ovp .tbl th { background: var(--s1); }
+.ovp .tbl td, .ovp .tbl th { padding-left: 20px; }
+@media (max-width: 860px) { .vl { grid-template-columns: minmax(0, 1fr); } .vl > div + div { border-left: 0; border-top: 1px solid var(--line); } .lg3 { grid-template-columns: minmax(0, 1fr); } .fac { display: none; } }
+
+/* Task run: what happened, the evidence, the facts. */
+.rlead { margin: 2px 0 0; color: var(--t2); }
+.xh:has(+ .r3), .xh { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.r3 { flex: 1; display: grid; grid-template-columns: 256px minmax(0, 1fr) 280px; min-height: 0; }
+.stp { padding: 14px 20px; border-right: 1px solid var(--line); overflow: auto; }
+.h5 { font-size: 12.5px; color: var(--t3); margin-bottom: 10px; }
+.s { position: relative; padding: 0 0 16px 18px; border-left: 1px solid var(--line2); margin-left: 4px; }
+.s > i { position: absolute; left: -4.5px; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--t3); }
+.s.end { border-color: transparent; padding-bottom: 0; }
+.s.end > i { background: var(--a); }
+.s.end.bad > i { background: var(--err); }
+.sa { font-weight: 500; }
+.ol2 { display: flex; justify-content: space-between; align-items: center; height: 30px; }
+.mid { min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.mid .xb { flex: 1; min-height: 0; }
+.mid .xl { min-width: 0; }
+.rfx { border-left: 1px solid var(--line); overflow: auto; min-height: 0; }
+@media (max-width: 1100px) { .r3 { grid-template-columns: minmax(0, 1fr); overflow: auto; } .stp, .rfx { border: 0; } }
+
+.mid .xb { display: block; flex: 1; min-height: 0; overflow: auto; border: 0; }
+.mid .xl { display: flex; flex-direction: column; width: auto; min-height: 100%; }
+.rfx { width: auto; }
+.rfx .kvg { grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; }
+.rfx .kvr .val { justify-content: flex-end; text-align: right; }
+.rfx .rd { border-bottom: 1px solid var(--line); }
+
+.tbl th, .lhead { background: var(--s1); }
+.dcard { background: transparent; }
+.dcard:hover { background: var(--s2); }

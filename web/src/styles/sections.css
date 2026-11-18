@@ -1,0 +1,215 @@
+/* Slate and Lime. No boxes: a page is one continuous panel of ruled sections, and every chart shares one clock. */
+
+/* ---- Sections replace cards. ---- */
+.ov { padding: 0; }
+.card, .mband { background: none; border: 0; border-radius: 0; box-shadow: none; }
+.card { border-bottom: 1px solid var(--line); }
+.card:last-child { border-bottom: 0; }
+.ch { min-height: 40px; padding: 10px 20px 6px; font-size: 13px; font-weight: 550; letter-spacing: -.008em; gap: 12px; }
+.ch .a, .ch span.a { font-weight: 400; color: var(--t3); }
+.cb { padding: 2px 20px 14px; }
+.ovg { gap: 0; border-bottom: 1px solid var(--line); }
+.ovg:last-child { border-bottom: 0; }
+.ovg > * { min-width: 0; }
+.ovg > * + * { border-left: 1px solid var(--line); }
+.ovg > .card, .ovg > .stack > .card:last-child { border-bottom: 0; }
+.stack { display: flex; flex-direction: column; min-width: 0; }
+.lst { padding: 0 20px; height: 36px; border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.ch + .lst, .ch + .tbl tr:first-child td { border-top-color: var(--line); }
+.lst:last-child { border-bottom: 0; }
+
+/* ---- The one header a detail page gets. ---- */
+.dh { flex: none; display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 6px 20px; border-bottom: 1px solid var(--line); min-width: 0; }
+.dh h2 { margin: 0; font-size: 14px; line-height: 1.3; font-weight: 550; letter-spacing: -.01em; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dh h2.mono { font-weight: 500; letter-spacing: -.02em; }
+.dhr { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: none; }
+.dhm { color: var(--t3); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.xh h2 { font-size: 14px; font-weight: 550; letter-spacing: -.01em; }
+.dnote { padding: 10px 20px; border-bottom: 1px solid var(--line); color: var(--t2); line-height: 1.5; }
+.dnote b { font-weight: 500; }
+
+/* ---- Figures with no chart to sit beside: one quiet row, never tiles. ---- */
+.mband { display: flex; flex-wrap: wrap; gap: 8px 36px; padding: 12px 20px; border-bottom: 1px solid var(--line); margin: 0; }
+.met { padding: 0; min-width: 0; }
+.met + .met { border: 0; }
+.met .l { display: flex; gap: 8px; justify-content: flex-start; font-size: 12px; color: var(--t3); white-space: nowrap; }
+.met .v { font: 500 16px/1.35 var(--sans); letter-spacing: -.015em; margin-top: 1px; font-variant-numeric: tabular-nums; }
+.met .v small { font-size: 12px; }
+
+/* ---- The clock. ---- */
+.lns { position: relative; border-bottom: 1px solid var(--line); touch-action: pan-y; }
+.lnr { display: grid; grid-template-columns: 176px minmax(0, 1fr) 228px; align-items: center; column-gap: 16px; padding: 0 20px; border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.lnh { border-top: 0; height: 28px; }
+.lnh .xax { position: relative; height: 14px; }
+.lnn { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 7px 0; color: inherit; }
+a.lnn:hover .nm { color: var(--a); }
+.lnn svg { width: 15px; height: 15px; flex: none; color: var(--t3); }
+.lnt { display: block; min-width: 0; }
+.lnt .nm { display: block; font-weight: 500; font-size: 13px; transition: color var(--dur-short) var(--ease-out); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lnt .sm { display: block; font-size: 12px; color: var(--t3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lane { min-width: 0; padding: 7px 0; cursor: crosshair; user-select: none; }
+.lnf { display: grid; grid-template-columns: repeat(3, 76px); }
+.lnc { text-align: right; font-size: 12px; color: var(--t3); }
+.lnv { display: grid; justify-items: end; min-width: 0; }
+.lnv b { font-weight: 500; font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lnv small { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--t3); white-space: nowrap; }
+.lnv small i { width: 7px; height: 2px; border-radius: 1px; flex: none; }
+.lncur { position: absolute; top: 28px; bottom: 0; width: 1px; background: var(--line3); pointer-events: none; }
+.lnsel { position: absolute; top: 28px; bottom: 0; background: var(--a-soft); border-inline: 1px solid var(--a); pointer-events: none; }
+.lntip { position: absolute; top: 30px; z-index: 5; margin-left: 12px; padding: 7px 10px; display: grid; gap: 3px; min-width: 170px; background: var(--raised); border: 1px solid var(--line2); border-radius: var(--rad-ctl); font-size: 12px; pointer-events: none; white-space: nowrap; }
+.lntip.flip { translate: calc(-100% - 24px) 0; }
+.lntip > b { font-weight: 500; color: var(--t2); }
+.lntip > span { display: flex; justify-content: space-between; gap: 16px; }
+.lntip em { font-style: normal; color: var(--t3); }
+.lntv { display: flex; gap: 8px; font-variant-numeric: tabular-nums; }
+.lntv small { color: var(--t3); font-size: 11.5px; }
+
+/* ---- Tables run edge to edge. ---- */
+.tbl td:first-child, .tbl th:first-child { padding-left: 20px; }
+.tbl td:last-child, .tbl th:last-child { padding-right: 20px; }
+.subbar { padding: 9px 20px; border-bottom: 1px solid var(--line); min-height: 46px; }
+.subbar + .tblwrap .tbl th, .card .tbl th { background: var(--s1); }
+
+/* ---- Attention rows lead a page with no heading: they say what they are. ---- */
+.attn:empty { display: none; }
+.attn .ar:first-child { border-top: 0; }
+.xbar { display: flex; height: 8px; border-radius: var(--rad-mark); overflow: clip; background: var(--s2); gap: 1px; }
+.xbar i { display: block; min-width: 2px; transition: flex-grow var(--dur-long) var(--ease-out); }
+.xleg { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-top: 10px; font-size: 12.5px; color: var(--t3); }
+.xleg span { display: inline-flex; align-items: baseline; gap: 6px; }
+.xleg b { font-weight: 500; color: var(--t1); font-variant-numeric: tabular-nums; }
+.xleg i { width: 8px; height: 8px; border-radius: var(--rad-mark); align-self: center; }
+
+/* ---- A budget: how much of the allowance is left. ---- */
+.budget { display: grid; grid-template-columns: minmax(0, 1.2fr) 200px 180px 110px; align-items: center; gap: 20px; padding: 11px 20px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+.budget .nm { font-weight: 500; display: flex; gap: 8px; align-items: center; }
+.budget .sm { display: block; margin-top: 1px; font-size: 12.5px; color: var(--t3); }
+.btrack { height: 6px; background: var(--s2); border-radius: var(--rad-mark); overflow: clip; }
+.btrack i { display: block; height: 100%; background: var(--a); border-radius: var(--rad-mark); transform-origin: left; transition: scale var(--dur-long) var(--ease-out); }
+.btrack.err i { background: var(--err); }
+.btrack.warn i { background: var(--warn); }
+
+/* ---- Phones: lanes stack. ---- */
+@media (max-width: 760px) {
+  .lnr { grid-template-columns: minmax(0, 1fr); padding: 8px 14px; }
+  .lnh { display: none; }
+  .lnf { display: flex; gap: 18px; }
+  .lnv { justify-items: start; }
+  .lncur, .lntip { display: none; }
+  .ovg { grid-template-columns: minmax(0, 1fr) !important; }
+  .ovg > * + * { border-left: 0; border-top: 1px solid var(--line); }
+  .budget { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}
+
+/* ---- A share of a whole inside a row. Drawn with scale so sorting and refetching glide. ---- */
+.share { display: block; height: 4px; background: var(--s2); border-radius: var(--rad-mark); overflow: clip; }
+.share i { display: block; height: 100%; background: var(--a); transform-origin: left; transition: scale var(--dur-long) var(--ease-out); }
+.share.bad i { background: var(--err); }
+.ell2 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
+/* ---- Code. ---- */
+.hl-keyword, .hl-command, .hl-heading { color: var(--hl-keyword); }
+.hl-string, .hl-inserted, .hl-link { color: var(--hl-string); }
+.hl-number, .hl-literal { color: var(--hl-number); }
+.hl-function, .hl-type, .hl-selector { color: var(--hl-function); }
+.hl-property, .hl-attr { color: var(--hl-property); }
+.hl-variable, .hl-code-inline { color: var(--hl-variable); }
+.hl-comment, .hl-meta { color: var(--hl-comment); }
+.hl-operator { color: var(--hl-operator); }
+.hl-deleted { color: var(--err); }
+.hl-tag { color: var(--warn); }
+.code { position: relative; min-width: 0; background: var(--well); border-radius: var(--rad-ctl); font: 12px/1.65 var(--mono); letter-spacing: -.015em; color: var(--t2); }
+.code pre { margin: 0; padding: 10px 12px; font: inherit; letter-spacing: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code.flat { border-radius: 0; border-bottom: 1px solid var(--line); }
+.code.flat pre { padding: 12px 20px; }
+.code.shut pre { max-height: 216px; overflow: hidden; mask-image: linear-gradient(180deg, var(--mask-solid) 70%, transparent); }
+.codem { position: absolute; right: 12px; bottom: 8px; }
+.code:not(.shut) .codem { position: static; display: block; margin: -4px 0 8px 12px; }
+.card > .code { margin: 0 20px 14px; }
+.hled { display: grid; min-width: 0; }
+.hled > * { grid-area: 1 / 1; min-width: 0; margin: 0; }
+.hled pre { padding: 12px 16px; font: 12.5px/1.7 var(--mono); letter-spacing: -.01em; white-space: pre-wrap; overflow-wrap: anywhere; overflow: hidden; color: var(--t1); pointer-events: none; }
+.hled .editor { position: relative; padding: 12px 16px; font: 12.5px/1.7 var(--mono); letter-spacing: -.01em; white-space: pre-wrap; overflow-wrap: anywhere; color: transparent; caret-color: var(--t1); background: transparent; }
+.hled .editor::selection { background: var(--a-soft); color: transparent; }
+.tree .kk { color: var(--hl-property); }
+.tree .sv { color: var(--hl-string); }
+.tree .nv { color: var(--hl-number); }
+.code.shut .codem { background: var(--well); padding: 1px 6px; border-radius: var(--rad-inner); }
+.code.flat .codem { right: 20px; }
+
+/* ---- Tabs sit centred in their strip. ---- */
+.ptab { display: inline-flex; align-items: center; height: 38px; font-size: 13px; }
+.ptabs { padding-inline: 20px; }
+
+/* ---- Steps of a process: read along a line, not out of boxes. ---- */
+.fs { background: none; border-radius: 0; padding: 2px 0 2px 12px; border-left: 1px solid var(--line2); }
+.fs b { font: 500 16px/1.35 var(--sans); letter-spacing: -.015em; font-variant-numeric: tabular-nums; }
+.fs span { font-size: 12.5px; }
+.fs em { font: 12px var(--sans); margin-top: 1px; }
+.flowseq { display: flex; gap: 28px; }
+
+/* ---- Dashboards: the same ruled panel, widgets separated by lines. ---- */
+.dwg { gap: 0; }
+.dwg > .card { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.dwg .wacts { font-weight: 400; color: var(--t3); }
+.wacts a { color: var(--t3); }
+.wacts a:hover { color: var(--t1); }
+.dwg .met .v { font-size: 20px; }
+
+/* ---- One control height. Anything that sits in a row with others is --ctl tall, anything inside a control --ctl-in. ---- */
+.btn, .fchip, .sb, .finp, .input, .seg, .tgl, .ib { box-sizing: border-box; height: var(--ctl); line-height: 1; }
+.btn, .fchip, .tgl, .addf, .seg button, .lvls button { display: inline-flex; align-items: center; justify-content: center; font-size: 12.5px; line-height: 1; }
+.btn { padding: 0 10px; gap: 6px; }
+.ib { width: var(--ctl); flex: none; }
+.sb, .finp { padding: 0 9px; }
+.input { padding: 0 10px; font-size: 12.5px; }
+.sb input, .finp input, .qbar input { font-size: 12.5px; line-height: 1; height: var(--ctl-in); padding: 0; }
+.seg { padding: 2px; }
+.seg button { height: calc(var(--ctl) - 4px); padding: 0 9px; font-size: 12.5px; }
+.lvls { align-items: center; height: var(--ctl); }
+.lvls button { height: var(--ctl); padding: 0 9px; }
+.qbar { box-sizing: border-box; min-height: var(--ctl); padding: 2px 3px 2px 9px; gap: 6px; border-radius: var(--rad-ctl); background: var(--raised); border: 1px solid var(--line); }
+.addf { height: var(--ctl-in); padding: 0 7px; gap: 5px; }
+.kbd { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 18px; height: 18px; padding: 0 4px; font: 400 11px/1 var(--sans); box-shadow: none; }
+.btn .kbd { margin-block: 0; }
+.nsec.nsb { box-sizing: border-box; height: 26px; padding: 0 8px; margin-top: 6px; font-size: 12px; gap: 4px; }
+.nsec.nsb svg { flex: none; margin: 0; }
+.nsec.nsb > * { line-height: 1; }
+:not(.qbar) > .addf { height: var(--ctl); }
+.wpick { box-sizing: border-box; display: inline-flex; align-items: center; height: var(--ctl-in); padding: 0 8px; font-size: 12.5px; line-height: 1; vertical-align: middle; }
+.xt { font-size: 14px; font-weight: 550; letter-spacing: -.01em; }
+.xaxis, .xaxis span, .xax span { font: 400 11.5px/1 var(--sans); letter-spacing: 0; font-variant-numeric: tabular-nums; color: var(--t3); }
+input.wpick { font: 500 12.5px/1 var(--mono); background: var(--s3); color: var(--t1); }
+.frame { padding-inline: 20px; }
+.srcv { padding-inline: 20px; }
+@media (max-width: 760px) {
+  .ctrls { flex-wrap: wrap; overflow: visible; }
+  .ctrls .seg button { padding: 0 7px; }
+  .btn.srch { min-width: 0; flex: 1; }
+}
+@media (max-width: 760px) {
+  .ar .go { display: none; }
+  .ar { grid-template-columns: 26px minmax(0, 1fr); }
+}
+/* Column heads name the figures on a wide screen. A phone has no column heads, so each figure names itself. */
+.lnphone { display: none !important; }
+@media (max-width: 760px) {
+  .lnphone { display: flex !important; }
+}
+
+/* ---- Motion: anything you can click settles softly by default, and specific rules above only refine it. ---- */
+a, button, summary, select, tr.click td, .lst, .lnn, .ar {
+  transition-property: color, background-color, border-color, box-shadow, opacity, scale, translate;
+  transition-duration: var(--dur-short);
+  transition-timing-function: var(--ease-out);
+}
+input, textarea { transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.lncur, .lntip { opacity: 0; transition: opacity var(--dur-short) var(--ease-out); }
+.lncur.on, .lntip.on { opacity: 1; transition-duration: var(--dur-micro); }
+.lnsel { animation: fade-in var(--dur-micro) var(--ease-out); }
+.banner, .dnote { animation: fade-in var(--dur-long) var(--ease-out); }
+.code.shut pre { transition: mask-image var(--dur-short) var(--ease-out); }
+
+/* ---- A lane that opens something: the whole row is the link, and a drag on the chart still zooms. ---- */
+.lnr-click { cursor: pointer; transition: background-color var(--dur-short) var(--ease-out); }
+.lnr-click:hover, .lnr-click:focus-visible { background: var(--s2); outline: none; }

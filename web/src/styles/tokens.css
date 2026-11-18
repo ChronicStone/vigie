@@ -1,0 +1,160 @@
+/* One scale for corners, one for time. Components never carry a literal radius or duration. */
+:root {
+  --rad-mark: 2px;
+  --rad-inner: 4px;
+  --rad-ctl: 6px;
+  --rad-card: 8px;
+  --rad-over: 10px;
+
+  --dur-micro: 110ms;
+  --dur-short: 180ms;
+  --dur-long: 280ms;
+  --ease-out: cubic-bezier(.22, .8, .24, 1);
+  --ease-in: cubic-bezier(.5, 0, .75, .2);
+  --ease-in-out: cubic-bezier(.45, 0, .25, 1);
+
+  /* Surface and ink steps kept from the Doop frames: white and black at a given strength, then the exact tints used once. */
+  --hex-000: #000;
+  --hex-0b0b0d: #0B0B0D;
+  --hex-101114: #101114;
+  --hex-111: #111;
+  --hex-17181c: #17181C;
+  --hex-18181b: #18181B;
+  --hex-333338: #333338;
+  --hex-79c9a0: #79C9A0;
+  --hex-83c9a0: #83C9A0;
+  --hex-86aee8: #86AEE8;
+  --hex-8d8f94: #8D8F94;
+  --hex-8fb6ff: #8FB6FF;
+  --hex-90b9ff: #90B9FF;
+  --hex-92b4ec: #92B4EC;
+  --hex-aeb0b4: #AEB0B4;
+  --hex-bbd2ff: #BBD2FF;
+  --hex-c9a2e8: #C9A2E8;
+  --hex-dfae66: #DFAE66;
+  --hex-e9b15f: #E9B15F;
+  --hex-ececea: #ECECEA;
+  --hex-f2f2ee: #F2F2EE;
+  --hex-f2f2f0: #F2F2F0;
+  --hex-ff5a6e: #FF5A6E;
+  --hex-ff7d78: #FF7D78;
+  --hex-fff: #fff;
+  --k-200: rgba(0,0,0,.2);
+  --k-300: rgba(0,0,0,.3);
+  --k-340: rgba(0,0,0,.34);
+  --k-400: rgba(0,0,0,.4);
+  --k-420: rgba(0,0,0,.42);
+  --k-450: rgba(0,0,0,.45);
+  --k-500: rgba(0,0,0,.5);
+  --k-600: rgba(0,0,0,.6);
+  --k-700: rgba(0,0,0,.7);
+  --rgb-10-10-12-62: rgba(10,10,12,.62);
+  --rgb-11-11-13-68: rgba(11,11,13,.68);
+  --rgb-11-11-13-7: rgba(11,11,13,.7);
+  --rgb-13-13-16-58: rgba(13,13,16,.58);
+  --rgb-14-14-17-92: rgba(14,14,17,.92);
+  --rgb-143-233-242-4: rgba(143,233,242,.4);
+  --rgb-22-22-25-88: rgba(22,22,25,.88);
+  --rgb-5-6-10-38: rgba(5,6,10,.38);
+  --w-016: rgba(255,255,255,.016);
+  --w-018: rgba(255,255,255,.018);
+  --w-025: rgba(255, 255, 255, .025);
+  --w-028: rgba(255,255,255,.028);
+  --w-035: rgba(255,255,255,.035);
+  --w-036: rgba(255,255,255,.036);
+  --w-040: rgba(255,255,255,.04);
+  --w-045: rgba(255,255,255,.045);
+  --w-050: rgba(255,255,255,.05);
+  --w-055: rgba(255,255,255,.055);
+  --w-060: rgba(255,255,255,.06);
+  --w-065: rgba(255,255,255,.065);
+  --w-070: rgba(255,255,255,.07);
+  --w-075: rgba(255,255,255,.075);
+  --w-080: rgba(255,255,255,.08);
+  --w-085: rgba(255,255,255,.085);
+  --w-090: rgba(255,255,255,.09);
+  --w-100: rgba(255,255,255,.1);
+  --w-120: rgba(255,255,255,.12);
+  --w-140: rgba(255,255,255,.14);
+  --w-160: rgba(255,255,255,.16);
+  --w-200: rgba(255,255,255,.2);
+  --w-220: rgba(255,255,255,.22);
+  --w-500: rgba(255,255,255,.5);
+  --w-620: rgba(255,255,255,.62);
+
+  /* The Charcoal palette and faces: one place, one value each. */
+  --bg: #0D1015;
+  --t1: #EDF0F5;
+  --s1: #14181F;
+  --s2: rgba(255,255,255,.045);
+  --s3: rgba(255,255,255,.08);
+  --inset: #101319;
+  --pop: #1C212B;
+  --line: rgba(255,255,255,.075);
+  --line2: rgba(255,255,255,.13);
+  --line3: rgba(255,255,255,.2);
+  --t2: #B7BECB;
+  --t3: #8B95A5;
+  --t4: #6A7484;
+  --acc: #C6E96E;
+  --acc-ink: #1A2206;
+  --acc-soft: rgba(198,233,110,.13);
+  --err: #F4757F;
+  --err-soft: rgba(244,117,127,.1);
+  --warn: #E9B663;
+  --warn-soft: rgba(233,182,99,.1);
+  --ok: #62CC95;
+  --app: #A5A5AD;
+  --db: #6BB5AA;
+  --ext: #83A6DE;
+  --cache: #B5AC78;
+  --task: #BF96B4;
+  --mono: "Geist Mono Variable", ui-monospace, Menlo, monospace;
+  --title: 15px;
+  --row: 36px;
+  --evt: var(--mono);
+  --evs: 12.5px;
+  --evl: -.01em;
+  --a1: #C6E96E;
+  --a2: #C6E96E;
+  --hi: none;
+  --stick: #14181F;
+  --bgc: #0D1015;
+  --link: #C6E96E;
+  --kw: #B3A8EA;
+  --str: #8FCDAF;
+  --mark1: #E47A6C;
+  --mark2: #C4554C;
+  --ray-hot: #E98D80;
+  --chart: #C6E96E;
+  --card: #14181F;
+  --raised: #1C212B;
+  --well: #101319;
+  --sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --disp: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --read: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  /* The primary. One place: every chart, selection and link follows it. */
+  --a: #C6E96E;
+  --ai: #1A2206;
+  --a-soft: color-mix(in srgb, var(--a) 13%, transparent);
+}
+
+/* Code. One colour per kind of thing, all soft, keywords in the product's lime. */
+:root {
+  --hl-keyword: var(--a);
+  --hl-string: #E5C38F;
+  --hl-number: #9CC4F5;
+  --hl-function: #AFBBF7;
+  --hl-property: #C9D1DE;
+  --hl-variable: #D4AEE9;
+  --hl-comment: var(--t4);
+  --hl-operator: var(--t3);
+}
+
+/* Control sizes. Everything a person clicks or types in, side by side, is one height. */
+:root {
+  --ctl: 30px;
+  --ctl-in: 24px;
+}
+
+:root { --mask-solid: #000; }

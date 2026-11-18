@@ -1,0 +1,10 @@
+{$VIGIE_DOMAIN} {
+	encode zstd gzip
+	# Exporters post here too: /otlp/v1/{traces,logs,metrics}, authenticated by their ingest key.
+	reverse_proxy vigie:4310 {
+		flush_interval -1
+	}
+	request_body {
+		max_size 32MB
+	}
+}

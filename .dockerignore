@@ -1,0 +1,10 @@
+node_modules
+dist
+.vigie
+.git
+mockups
+research
+tools
+test
+*.log
+.env

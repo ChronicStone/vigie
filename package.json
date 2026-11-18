@@ -1,0 +1,90 @@
+{
+  "name": "vigie",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-hosted telemetry for Node apps: logs, traces, tasks, alerts, a status page and MCP, on OpenTelemetry and ClickHouse.",
+  "bin": {
+    "vigie": "cli/vigie.ts"
+  },
+  "scripts": {
+    "vigie": "bun cli/vigie.ts",
+    "dev": "bun cli/vigie.ts dev",
+    "start": "bun cli/vigie.ts start",
+    "seed": "bun cli/vigie.ts seed",
+    "build": "bun --bun x vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "bun test test/unit",
+    "test:integration": "bun test test/integration",
+    "test:e2e": "node test/e2e/behaviour.mjs",
+    "test:align": "node test/e2e/align.mjs"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.9.0",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@tanstack/ai": "1.0.1",
+    "@tanstack/ai-openai": "1.0.1",
+    "@tanstack/ai-react": "1.0.1",
+    "@tanstack/charts": "1.2.1",
+    "@tanstack/highlight": "^1.2.11",
+    "@tanstack/react-form": "1.33.5",
+    "@tanstack/react-query": "5.105.3",
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
+    "@tanstack/react-table": "9.3.1",
+    "@tanstack/react-virtual": "3.14.26",
+    "better-auth": "1.7.16",
+    "nodemailer": "^10.3.1",
+    "protobufjs": "8.8.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "uqr": "^0.1.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tanstack/redact": "0.3.0",
+    "@tanstack/router-plugin": "1.168.48",
+    "@types/bun": "latest",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@vitejs/plugin-react": "6.2.1",
+    "playwright-core": "1.64.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  },
+  "exports": {
+    "./sdk": "./sdk/index.ts",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "files": [
+    "cli",
+    "server",
+    "sdk",
+    "dist",
+    "deploy",
+    "definitions",
+    "LICENSE",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChronicStone/vigie.git"
+  },
+  "homepage": "https://vigie-docs.vercel.app",
+  "keywords": [
+    "observability",
+    "telemetry",
+    "opentelemetry",
+    "clickhouse",
+    "wide-events",
+    "adonisjs",
+    "nestjs",
+    "self-hosted",
+    "mcp",
+    "status-page"
+  ]
+}

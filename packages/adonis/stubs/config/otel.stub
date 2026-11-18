@@ -1,0 +1,24 @@
+{{{
+  exports({ to: app.configPath('otel.ts') })
+}}}
+import { defineConfig, destinations } from '@adonisjs/otel'
+import env from '#start/env'
+
+// No trailing slash: OTLP paths are added after it.
+const vigie = env.get('VIGIE_URL')?.replace(/[/]$/, '')
+const key = env.get('VIGIE_KEY')
+
+export default defineConfig({
+  serviceName: env.get('APP_NAME'),
+  serviceVersion: env.get('APP_VERSION'),
+  environment: env.get('APP_ENV'),
+  instrumentations: {
+    // Without this, every batch the app sends to Vigie would show up as a span of its own.
+    '@opentelemetry/instrumentation-undici': {
+      ignoreRequestHook: (request: { origin: string }) => Boolean(vigie) && request.origin === new URL(vigie!).origin,
+    },
+  },
+  destinations: vigie
+    ? { vigie: destinations.otlp({ endpoint: vigie + '/otlp', ...(key ? { headers: { authorization: 'Bearer ' + key } } : {}) }) }
+    : {},
+})

@@ -1,0 +1,5 @@
+export { configure } from './configure.js'
+export { stubsRoot } from './stubs/main.js'
+export { defineConfig, type VigieConfig } from './src/define_config.js'
+export { task, type TaskInfo, type TaskOutcome } from './src/tasks.js'
+export { runWithWideEvent, useLogger, getActiveTraceContext } from './src/execution.js'

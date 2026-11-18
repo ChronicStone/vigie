@@ -1,0 +1,19 @@
+{{{
+  exports({ to: app.configPath('vigie.ts') })
+}}}
+import env from '#start/env'
+import { defineConfig } from '@vigie/adonis'
+
+/**
+ * Every request becomes one wide event in Vigie: route, status, duration, user and
+ * whatever you add with ctx.log.set(). Background work goes through task().
+ */
+export default defineConfig({
+  url: env.get('VIGIE_URL'),
+  key: env.get('VIGIE_KEY'),
+  service: env.get('APP_NAME'),
+  environment: env.get('APP_ENV'),
+  version: env.get('APP_VERSION'),
+  ignorePaths: ['/health'],
+  secretPaths: [],
+})

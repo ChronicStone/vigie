@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": false,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": [
+      "bun"
+    ],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "vigie/sdk": [
+        "./sdk/index.ts"
+      ],
+      "@sdk": [
+        "./sdk/index.ts"
+      ],
+      "@web/*": [
+        "./web/src/*"
+      ],
+      "@server/*": [
+        "./server/*"
+      ]
+    }
+  },
+  "include": [
+    "server",
+    "web/src",
+    "sdk",
+    "cli",
+    "definitions",
+    "test"
+  ]
+}

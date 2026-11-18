@@ -1,0 +1,15 @@
+{
+  "name": "vigie-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "generate": "nuxt generate && node scripts/postbuild.mjs",
+    "preview": "npx serve .output/public"
+  },
+  "dependencies": {
+    "better-sqlite3": "12.8.0",
+    "docus": "5.8.1",
+    "nuxt": "4.4.2"
+  }
+}

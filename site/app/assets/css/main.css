@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* The lighthouse coral of the landing page. */
+@theme static {
+  --color-coral-50: #fdf4f2;
+  --color-coral-100: #fbe6e2;
+  --color-coral-200: #f7cfc8;
+  --color-coral-300: #efaea3;
+  --color-coral-400: #e4867a;
+  --color-coral-500: #d9685c;
+  --color-coral-600: #c24d41;
+  --color-coral-700: #a23d33;
+  --color-coral-800: #86352d;
+  --color-coral-900: #70322b;
+  --color-coral-950: #3c1612;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Wide tables scroll on their own instead of pushing the page sideways on a phone. */
+.prose table,
+main table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
