@@ -16,7 +16,8 @@
     "test": "bun test test/unit",
     "test:integration": "bun test test/integration",
     "test:e2e": "node test/e2e/behaviour.mjs",
-    "test:align": "node test/e2e/align.mjs"
+    "test:align": "node test/e2e/align.mjs",
+    "prepack": "bun run build"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
@@ -85,5 +86,8 @@
     "self-hosted",
     "mcp",
     "status-page"
-  ]
+  ],
+  "engines": {
+    "bun": ">=1.3"
+  }
 }

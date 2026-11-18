@@ -18,7 +18,8 @@
     "./services/main": "./build/src/services/main.js"
   },
   "scripts": {
-    "build": "rm -rf build && tsc -p tsconfig.json && mkdir -p build/stubs/config && cp stubs/config/*.stub build/stubs/config/"
+    "build": "rm -rf build && tsc -p tsconfig.json && mkdir -p build/stubs/config && cp stubs/config/*.stub build/stubs/config/",
+    "prepack": "npm run build"
   },
   "keywords": [
     "adonisjs",
