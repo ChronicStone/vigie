@@ -5,6 +5,11 @@ export default defineNuxtConfig({
     name: 'Vigie',
     url: 'https://vigie.chronicstone.dev',
   },
+  llms: {
+    domain: 'https://vigie.chronicstone.dev',
+    title: 'Vigie',
+    description: 'Self-hosted telemetry for Node apps: logs, traces, tasks, alerts, a status page and MCP, on OpenTelemetry and ClickHouse. Adonis and NestJS in one command.',
+  },
   nitro: {
     // Plain static files in .output/public everywhere, Vercel included: the landing is copied in after the build.
     preset: 'static',
