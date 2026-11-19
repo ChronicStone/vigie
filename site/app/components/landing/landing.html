@@ -1,0 +1,454 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-mark" viewBox="0 0 22 22"><rect width="22" height="22" rx="6.5" fill="var(--sun)"/><circle cx="11" cy="11" r="5.2" fill="none" stroke="var(--ink)" stroke-width="1.7"/><circle cx="11" cy="11" r="1.9" fill="var(--ink)"/></symbol>
+    <symbol id="i-ov" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></symbol>
+    <symbol id="i-logs" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h6"/></symbol>
+    <symbol id="i-tr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 4h7M5 8h7M8 12h6"/></symbol>
+    <symbol id="i-req" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3 5h9l-2-2M13 11H4l2 2"/></symbol>
+    <symbol id="i-task" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-proc" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="3.5" cy="8" r="1.8"/><circle cx="12.5" cy="4" r="1.8"/><circle cx="12.5" cy="12" r="1.8"/><path d="M5.3 8h2.2l3.2-3.6M7.5 8l3.2 3.6"/></symbol>
+    <symbol id="i-iss" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2.5 14 13H2z" stroke-linejoin="round"/><path d="M8 6.5v3" stroke-linecap="round"/></symbol>
+    <symbol id="i-al" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 11V7a4 4 0 0 1 8 0v4l1 1.5H3z" stroke-linejoin="round"/><path d="M6.5 14h3" stroke-linecap="round"/></symbol>
+    <symbol id="i-db" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="8" cy="4" rx="5" ry="2"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/></symbol>
+    <symbol id="i-set" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4 5 11M11 5l1.4-1.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="8.5" height="8.5" rx="2"/><path d="M3 10.5V4a1.5 1.5 0 0 1 1.5-1.5H11"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.35c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 .2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  </defs>
+</svg>
+
+<div id="top">
+
+<!-- 1. The watch -->
+<section class="hero" id="hero" aria-label="Vigie">
+  <canvas id="sea" aria-hidden="true"></canvas>
+  <div class="wrap copyb">
+    <h1>Keep watch from your own shore.</h1>
+    <p class="lede">Self-hosted telemetry for Node apps. Adonis and NestJS in one command, any OpenTelemetry stack in one line.</p>
+    <div class="acts">
+      <a class="btn pri" href="/docs/getting-started/introduction">Get started<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <span class="cmd"><b>bunx @vigiejs/cli --seed</b><button class="copy" data-copy="bunx @vigiejs/cli --seed" aria-label="Copy the command"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></span>
+    </div>
+  </div>
+  <div id="callouts" aria-live="polite"></div>
+  <div class="found" id="found"><div class="wrap"><span class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="foundTxt"><b>0 of 6</b> spotted</span><span>Turn the light with your pointer.</span></div></div>
+</section>
+
+<!-- 2. The product -->
+<section class="tour" id="docs">
+  <div class="wrap">
+    <div class="head">
+      <h2>From the first log line to the fix.</h2>
+      <p>Logs, traces, task runs, issues and business processes, read on one clock.</p>
+    </div>
+  </div>
+  <div class="story" id="story">
+    <div class="pin" id="pin">
+      <canvas class="glow" data-glow="tour" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <div class="steps" role="tablist" aria-label="Screens" id="tourTabs">
+          <button class="step" role="tab" aria-selected="true" data-t="logs"><i class="bar"></i><b><em>01</em>Logs</b><span>Every event, in your app's words.</span></button>
+          <button class="step" role="tab" aria-selected="false" data-t="traces"><i class="bar"></i><b><em>02</em>Traces</b><span>Where the 1.84 s went.</span></button>
+          <button class="step" role="tab" aria-selected="false" data-t="tasks"><i class="bar"></i><b><em>03</em>Tasks</b><span>Retries you can read.</span></button>
+          <button class="step" role="tab" aria-selected="false" data-t="issues"><i class="bar"></i><b><em>04</em>Issues</b><span>Why it broke, and the fix.</span></button>
+          <button class="step" role="tab" aria-selected="false" data-t="processes"><i class="bar"></i><b><em>05</em>Processes</b><span>What is stuck, and where.</span></button>
+        </div>
+    <div class="fit" id="fit">
+      <div class="app" id="app">
+        <nav class="side" aria-label="Vigie app">
+          <div class="brand"><svg aria-hidden="true"><use href="#i-mark"/></svg>Vigie</div>
+          <div class="ni"><svg aria-hidden="true"><use href="#i-ov"/></svg>Overview</div>
+          <div class="grp">Signals</div>
+          <div class="ni" data-n="logs"><svg aria-hidden="true"><use href="#i-logs"/></svg>Logs</div>
+          <div class="ni" data-n="traces"><svg aria-hidden="true"><use href="#i-tr"/></svg>Traces</div>
+          <div class="ni"><svg aria-hidden="true"><use href="#i-req"/></svg>Requests</div>
+          <div class="grp">Work</div>
+          <div class="ni" data-n="tasks"><svg aria-hidden="true"><use href="#i-task"/></svg>Tasks</div>
+          <div class="ni" data-n="processes"><svg aria-hidden="true"><use href="#i-proc"/></svg>Processes</div>
+          <div class="grp">Attention</div>
+          <div class="ni" data-n="issues"><svg aria-hidden="true"><use href="#i-iss"/></svg>Issues</div>
+          <div class="ni"><svg aria-hidden="true"><use href="#i-al"/></svg>Alerts</div>
+          <div class="ni"><svg aria-hidden="true"><use href="#i-db"/></svg>Database</div>
+          <div style="flex:1"></div>
+          <div class="ni"><svg aria-hidden="true"><use href="#i-set"/></svg>Settings</div>
+        </nav>
+        <div class="main">
+
+          <div class="pane on" data-p="logs">
+            <div class="ph">
+              <div class="search"><span class="k">service:</span>worker <span class="k">level:</span>warn+<span class="caret"></span></div>
+              <div class="r"><span class="chip lamp">Live</span><span>last 15 min</span></div>
+            </div>
+            <div class="logs">
+              <div class="lst" id="logList"></div>
+              <aside class="evp" id="evPanel"></aside>
+            </div>
+          </div>
+
+          <div class="pane" data-p="traces">
+            <div class="ph"><h4 class="m">POST /parcels</h4><span class="chip err">502</span><span class="k">1.84 s, 7 spans</span><div class="r"><span class="abtn">Open request</span></div></div>
+            <div class="wf">
+              <div class="wfh"><span>Span</span><div class="ticks" id="ticks"></div><span style="text-align:right">Time</span></div>
+              <div class="wfbody" id="wf"></div>
+            </div>
+            <div class="spand">
+              <div><div class="sec2" style="color:var(--app-t4);font-size:11.5px;margin-bottom:8px">parcelo.ship</div>
+                <dl class="kv"><dt>status</dt><dd style="color:var(--fault)">502 Bad Gateway</dd><dt>error.code</dt><dd><code>PARCELO_UNAVAILABLE</code></dd><dt>http.url</dt><dd>/parcelo/parcels</dd><dt>retry</dt><dd>scheduled in 30 s</dd></dl>
+              </div>
+              <div><div class="sec2" style="color:var(--app-t4);font-size:11.5px;margin-bottom:8px">Where the time went</div>
+                <dl class="kv"><dt>external</dt><dd>1.42 s, 77%</dd><dt>database</dt><dd>118 ms, 3 queries</dd><dt>cache</dt><dd>8 ms</dd><dt>app</dt><dd>294 ms</dd></dl>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane" data-p="tasks">
+            <div class="ph"><h4 class="m">parcelo.ship</h4><span class="chip ok">succeeded</span><span class="k">order:7781</span><div class="r"><span class="abtn">Open trace</span><span class="abtn">Requeue</span></div></div>
+            <div class="runh"><h3>parcelo.ship succeeded on attempt 2</h3><p>Parcelo answered 502 the first time. The retry 30 s later went through.</p></div>
+            <div class="lane">
+              <div class="att f" style="left:16px;width:300px"><b>Attempt 1 failed</b><span><code>PARCELO_UNAVAILABLE</code>, 1.42 s</span></div>
+              <div class="gap" style="left:324px;width:300px"><span>waited 30 s</span></div>
+              <div class="att s" style="left:632px;width:270px"><b>Attempt 2 succeeded</b><span>201 Created, 0.61 s</span></div>
+            </div>
+            <div class="taskcols">
+              <div class="box"><div class="sec2">Payload</div><pre class="json">{
+  <span class="s">"orderId"</span>: 7781,
+  <span class="s">"customer"</span>: <span class="s">"c***@acme.fr"</span>,
+  <span class="s">"token"</span>: <span class="red">"[REDACTED]"</span>,
+  <span class="s">"sessionCode"</span>: <span class="s">"RS6731-B2"</span>
+}</pre></div>
+              <div class="box"><div class="sec2">Part of</div>
+                <dl class="kv"><dt>process</dt><dd>Order fulfilment</dd><dt>step</dt><dd>Shipment created at Parcelo</dd><dt>caused by</dt><dd>paynest.payment.ingest</dd><dt>queue wait</dt><dd>2.1 s</dd></dl>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane" data-p="issues">
+            <div class="ph"><h4>Issues</h4><span class="k">3 open</span></div>
+            <div class="iss">
+              <div class="ilist">
+                <div class="ir sel"><b>Parcelo is refusing calls</b><span><code>PARCELO_UNAVAILABLE</code>, 38 events</span></div>
+                <div class="ir"><b>The request did not pass validation</b><span><code>E_VALIDATION_ERROR</code>, 6 events</span></div>
+                <div class="ir"><b>Same query 14 times on GET /sessions/:id</b><span>Likely N+1, 211 requests</span></div>
+              </div>
+              <div class="idet">
+                <div style="display:flex;gap:8px;align-items:center"><span class="chip err">firing</span><span class="k">first seen 13:21, last 14:02</span></div>
+                <h3>Parcelo is refusing calls</h3>
+                <div class="spark" id="spark"></div>
+                <div class="why">
+                  <div class="box"><div class="sec2">Why</div><p>Parcelo did not accept the call: 502 Bad Gateway</p></div>
+                  <div class="box"><div class="sec2">Fix</div><p>Nothing yet. Tasks retry on their own. If it lasts, check the provider's status and lower this kind's concurrency.</p></div>
+                </div>
+                <div style="display:flex;gap:8px"><span class="abtn pri">Resolve</span><span class="abtn">Create Linear issue</span><span class="abtn">Ask Vigie</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pane" data-p="processes">
+            <div class="ph"><h4>Order fulfilment</h4><span class="k">From a Paynest payment to a parcel on its way. SLA 4 h.</span><div class="r"><span>today</span></div></div>
+            <div class="proc">
+              <div class="flow">
+                <div class="stp" style="--i:0"><div class="t"><b>Payment confirmed by Paynest</b><span>412</span></div><div class="mtr"><i style="width:100%"></i></div></div>
+                <div class="join"><svg aria-hidden="true" viewBox="0 0 40 300" preserveAspectRatio="none" fill="none" stroke="rgba(255,255,255,.18)"><path d="M0 150 C20 150 20 37 40 37M0 150 C20 150 20 112 40 112M0 150 C20 150 20 188 40 188M0 150 C20 150 20 263 40 263"/></svg></div>
+                <div class="par">
+                  <div class="stp" style="--i:1"><div class="t"><b>Report rendered</b><span>409</span></div><div class="mtr"><i style="width:99%"></i></div></div>
+                  <div class="stp" style="--i:2"><div class="t"><b>Customer emailed</b><span>405</span></div><div class="mtr"><i style="width:98%"></i></div></div>
+                  <div class="stp stuck" style="--i:3"><div class="t"><b>Shipment created at Parcelo</b><span>371</span></div><div class="mtr"><i style="width:90%"></i></div><div class="note">6 waiting past 15 min, all on <code>PARCELO_UNAVAILABLE</code></div></div>
+                  <div class="stp" style="--i:4"><div class="t"><b>Declared to Taxbox</b><span>398</span></div><div class="mtr"><i style="width:96%"></i></div></div>
+                </div>
+              </div>
+              <div class="box" style="padding:0">
+                <div class="sec2" style="padding:12px 14px 4px">Waiting at Shipment created at Parcelo</div>
+                <div class="inst"><span class="m">order:7781</span><span>attempt 2 in 12 s</span><span class="chip warn">22 min</span></div>
+                <div class="inst"><span class="m">order:7779</span><span>attempt 3 in 1 min</span><span class="chip warn">21 min</span></div>
+                <div class="inst"><span class="m">order:7764</span><span>attempt 2 in 30 s</span><span class="chip warn">19 min</span></div>
+                <div class="inst"><span class="m">order:7760</span><span>attempt 2 in 44 s</span><span class="chip warn">17 min</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. One process -->
+<section class="stack" id="stack">
+  <div class="story2" id="story2">
+    <div class="pin2">
+      <canvas class="glow" data-glow="stack" aria-hidden="true"></canvas>
+      <div class="wrap grid">
+        <div class="iso" id="iso">
+          <div class="plate" data-l="0" style="--i:0"><div class="face"><b>ClickHouse</b><div class="px" data-tex="cols"></div></div></div>
+          <div class="plate" data-l="1" style="--i:1"><div class="face"><b>Ingest</b><div class="px" data-tex="flow"></div></div></div>
+          <div class="plate" data-l="2" style="--i:2"><div class="face"><b>App</b><div class="px" data-tex="rows"></div></div></div>
+          <div class="plate" data-l="3" style="--i:3"><div class="face"><b>Alerts and MCP</b><div class="px" data-tex="pulse"></div></div></div>
+          <div class="plate" data-l="4" style="--i:4"><div class="face"><b>definitions/</b><div class="px" data-tex="code"></div></div></div>
+        </div>
+        <div class="spec">
+          <div class="head">
+            <h2>One Bun process. ClickHouse behind it.</h2>
+            <p>Nothing else to operate. A broken definition shows its error and the rest keeps working.</p>
+          </div>
+          <ol class="layers" id="layers">
+            <li><button data-l="4"><b>definitions/</b><span>Your renderers, processes and alerts. Reloads when you save.</span></button></li>
+            <li><button data-l="3"><b>Alerts and MCP</b><span>Checked every 30 s, sent to Slack, webhooks and agents.</span></button></li>
+            <li><button data-l="2"><b>App</b><span>Logs, traces, tasks and issues, served as one SPA.</span></button></li>
+            <li><button data-l="1"><b>Ingest</b><span>OTLP over HTTP on :4318. Secrets are redacted here.</span></button></li>
+            <li><button data-l="0"><b>ClickHouse</b><span>Spans, wide events and metrics. State sits in SQLite.</span></button></li>
+          </ol>
+          <div class="facts">
+            <div><b>30<small>days</small></b><span>spans and metrics</span></div>
+            <div><b>90<small>days</small></b><span>wide events</span></div>
+            <div><b>400<small>days</small></b><span>rollups</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Definitions -->
+<section class="sec defs" id="definitions">
+  <canvas class="glow" data-glow="defs" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="head">
+      <h2>Your app's words, in plain code.</h2>
+      <p>Everything specific to your app lives in <code>definitions/</code> and deploys with it. Click a highlighted value to change it.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Definitions" id="defTabs" style="margin-top:32px">
+      <button class="tab" role="tab" aria-selected="true" data-d="renderer">defineLogRenderer</button>
+      <button class="tab" role="tab" aria-selected="false" data-d="error">defineErrorRenderer</button>
+      <button class="tab" role="tab" aria-selected="false" data-d="process">defineProcess</button>
+      <button class="tab" role="tab" aria-selected="false" data-d="alert">defineAlert</button>
+    </div>
+    <div class="ide">
+      <!-- renderer -->
+      <div class="dpane on" data-dp="renderer">
+        <div class="code"><div class="fh">definitions/renderers/providers.ts<span class="r">saved, reloaded</span></div>
+<pre><span class="ln"><span class="kw">export const</span> parcelo = <span class="fn">defineLogRenderer</span>({</span><span class="ln">  id: <span class="st">"parcelo"</span>,</span><span class="ln">  match: <span class="st">"parcelo.*"</span>,</span><span class="ln">  title: <span class="st">"<span class="ed" contenteditable="true" spellcheck="false" data-bind="title">Parcelo</span>"</span>,</span><span class="ln">  render: (e) =&gt; [</span><span class="ln">    ui.<span class="fn">numbers</span>({</span><span class="ln">      observed: e.<span class="fn">num</span>(<span class="st">"parcelo.parcelsObserved"</span>),</span><span class="ln">      created: e.<span class="fn">num</span>(<span class="st">"parcelo.parcelsDelivered"</span>),</span><span class="ln">    }),</span><span class="ln">    ui.<span class="fn">fields</span>(e, <span class="st">"parcelo."</span>, {</span><span class="ln">      tones: { refused: <button class="tv" data-bind="tone" data-opts="error,warn,neutral">"error"</button> },</span><span class="ln">    }),</span><span class="ln">  ],</span><span class="ln">  row: (e) =&gt;</span><span class="ln">    <span class="st">`${e.<span class="fn">num</span>(<span class="st">"parcelo.parcelsObserved"</span>)} parcels`</span>,</span><span class="ln">});</span></pre>
+        </div>
+        <div class="out">
+          <p class="cap"><b>The event panel</b>, for any event matching parcelo.*</p>
+          <div class="scr">
+            <div class="ph"><h4 id="rTitle">Parcelo</h4><span class="k m">parcelo.ship</span></div>
+            <div class="evp" style="padding:14px 16px">
+              <div class="nums" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><b>42</b><span>observed</span></div><div><b>41</b><span>created</span></div></div>
+              <dl class="kv"><dt>operation</dt><dd>deliver</dd><dt>outcome</dt><dd><span class="chip err" id="rTone">refused</span></dd><dt>session</dt><dd>RS6731-B2</dd><dt>attempt</dt><dd>1</dd></dl>
+            </div>
+          </div>
+          <p class="cap"><b>The log row</b>, in place of raw JSON</p>
+          <div class="scr"><div class="lr" style="grid-template-columns:86px 46px minmax(0,1fr)"><span class="t">14:02:11.4</span><span class="lv warn" id="rLv">warn</span><span class="msg"><span id="rTitle2">Parcelo</span> <i>42 parcels</i></span></div></div>
+        </div>
+      </div>
+      <!-- error -->
+      <div class="dpane" data-dp="error">
+        <div class="code"><div class="fh">definitions/renderers/platform.ts<span class="r">saved, reloaded</span></div>
+<pre><span class="ln"><span class="cm">// A provider that stops answering is what most</span></span><span class="ln"><span class="cm">// task alerts come down to, so say that first.</span></span><span class="ln"><span class="kw">export const</span> providerDown = <span class="fn">defineErrorRenderer</span>({</span><span class="ln">  id: <span class="st">"provider-unavailable"</span>,</span><span class="ln">  match: (error) =&gt; error.code.<span class="fn">endsWith</span>(<span class="st">"_UNAVAILABLE"</span>),</span><span class="ln">  headline: (error) =&gt; <span class="st">`${<span class="fn">name</span>(error)} is refusing calls`</span>,</span><span class="ln">  recovered: (error) =&gt; <span class="st">`${<span class="fn">name</span>(error)} is answering again`</span>,</span><span class="ln">  why: (error) =&gt; <span class="st">`${<span class="fn">name</span>(error)} did not accept the call`</span>,</span><span class="ln">  fix: () =&gt; <span class="st">"<span class="ed" contenteditable="true" spellcheck="false" data-bind="fix">Nothing yet. Tasks retry on their own.</span>"</span>,</span><span class="ln">});</span></pre>
+        </div>
+        <div class="out">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><p class="cap"><b>The post in your channel</b></p>
+            <div class="sw" id="errSw"><button aria-pressed="true" data-s="fire">Firing</button><button aria-pressed="false" data-s="rec">Recovered</button></div></div>
+          <div class="scr"><div class="post">
+            <div class="who"><svg aria-hidden="true"><use href="#i-mark"/></svg><div><b>Vigie</b><br><span>14:02, 3 alerts grouped</span></div></div>
+            <h6 id="eHead">Parcelo is refusing calls</h6>
+            <div id="eBody"><p class="lbl">Why</p><p>Parcelo did not accept the call: 502 Bad Gateway</p><p class="lbl" style="margin-top:8px">What to do</p><p id="eFix">Nothing yet. Tasks retry on their own.</p></div>
+            <div style="display:flex;gap:8px;margin-top:6px"><span class="abtn">Open issue</span><span class="abtn">Pause for 1 h</span></div>
+          </div></div>
+          <p class="cap">Alerts within 30 s go out as one post, with the errors behind them.</p>
+        </div>
+      </div>
+      <!-- process -->
+      <div class="dpane" data-dp="process">
+        <div class="code"><div class="fh">definitions/processes/acme.ts<span class="r">saved, reloaded</span></div>
+<pre><span class="ln"><span class="kw">export const</span> fulfilment = <span class="fn">defineProcess</span>({</span><span class="ln">  id: <span class="st">"results-delivery"</span>,</span><span class="ln">  title: <span class="st">"Order fulfilment"</span>,</span><span class="ln">  subject: <span class="st">"order"</span>,</span><span class="ln">  sla: <span class="st">"4h"</span>,</span><span class="ln">  steps: [</span><span class="ln">    step.<span class="fn">task</span>(<span class="st">"paynest.payment.ingest"</span>, { expectWithin: <span class="st">"30m"</span> }),</span><span class="ln">    step.<span class="fn">parallel</span>([</span><span class="ln">      step.<span class="fn">task</span>(<span class="st">"receipts.email"</span>, { optional: <span class="kw">true</span> }),</span><span class="ln">      step.<span class="fn">task</span>(<span class="st">"parcelo.ship"</span>, {</span><span class="ln">        label: <span class="st">"Shipment created at Parcelo"</span>,</span><span class="ln">        expectWithin: <button class="tv" data-bind="within" data-opts="15m,1h,5m">"15m"</button>,</span><span class="ln">      }),</span><span class="ln">    ]),</span><span class="ln">  ],</span><span class="ln">});</span></pre>
+        </div>
+        <div class="out">
+          <p class="cap"><b>What is stuck, and why</b></p>
+          <div class="scr" style="padding:16px;display:grid;gap:10px">
+            <div class="stp"><div class="t"><b>Payment confirmed by Paynest</b><span>412</span></div><div class="mtr"><i style="width:100%"></i></div></div>
+            <div class="stp"><div class="t"><b>Customer emailed</b><span>405</span></div><div class="mtr"><i style="width:98%"></i></div></div>
+            <div class="stp stuck" id="pStep"><div class="t"><b>Shipment created at Parcelo</b><span>371</span></div><div class="mtr"><i style="width:90%"></i></div><div class="note" id="pNote">6 waiting past 15 min</div></div>
+          </div>
+          <p class="cap">Every step also gets a funnel, its instances, and an MCP tool that reads them.</p>
+        </div>
+      </div>
+      <!-- alert -->
+      <div class="dpane" data-dp="alert">
+        <div class="code"><div class="fh">definitions/alerts/acme.ts<span class="r">saved, reloaded</span></div>
+<pre><span class="ln"><span class="kw">export const</span> apiErrors = <span class="fn">defineAlert</span>({</span><span class="ln">  id: <span class="st">"api-5xx"</span>,</span><span class="ln">  name: <span class="st">"API 5xx rate"</span>,</span><span class="ln">  when: { source: <span class="st">"request-error-rate"</span> },</span><span class="ln">  above: <button class="tv nu" data-bind="above" data-opts="2,1,5">2</button>,</span><span class="ln">  window: <span class="st">"10m"</span>,</span><span class="ln">  unit: <span class="st">"%"</span>,</span><span class="ln">  condition: <span class="st">"Server errors above <span id="aCond">2</span>% over 10 min"</span>,</span><span class="ln">});</span></pre>
+        </div>
+        <div class="out">
+          <p class="cap"><b>The last two hours, against your threshold</b></p>
+          <div class="scr chart" style="padding:14px 14px 8px"><svg id="aChart" viewBox="0 0 520 210" role="img" aria-label="5xx rate over two hours with the alert threshold"></svg></div>
+          <p class="verdict" id="aVerdict"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Agents -->
+<section class="sec agents" id="agents">
+  <canvas class="glow" data-glow="agents" aria-hidden="true"></canvas>
+  <div class="wrap grid">
+    <div>
+      <div class="head">
+        <h2>Agents read the same screens you do.</h2>
+        <p><code>POST /mcp</code> speaks MCP over HTTP. Every page and every <code>defineTool</code> becomes a tool. Payloads never leave through it.</p>
+      </div>
+      <div class="tools">
+        <div><p class="grp">With a read token</p><ul><li>get_context_pack</li><li>search_logs</li><li>get_event</li><li>get_trace</li><li>list_issues</li><li>list_tasks</li><li>list_processes</li><li>list_alerts</li><li>run_query</li></ul></div>
+        <div><p class="grp">With a write token, as the signed-in person</p><ul><li class="w">resolve_issue</li><li class="w">pause_alert</li></ul></div>
+      </div>
+    </div>
+    <div class="term" id="term" aria-live="polite">
+      <div class="thead"><canvas id="termLogo" width="57" height="104" aria-hidden="true"></canvas><p><b>Vigie MCP</b><br>POST /mcp with a read token<br>11 tools, every page included<br>payloads stay on your server</p></div>
+
+      <div class="ln q" data-type="Why are results not reaching Parcelo?"><span class="tx">Why are results not reaching Parcelo?</span></div>
+      <div class="ln"><div class="call"><span><b>get_context_pack</b>()</span><em>Acme: 5 processes, 41 task kinds, 7 alerts</em></div></div>
+      <div class="ln"><div class="call"><span><b>list_issues</b>({ status: "open" })</span><em>Parcelo is refusing calls, 38 events since 13:21</em></div></div>
+      <div class="ln"><div class="call"><span><b>list_processes</b>({ id: "order-fulfilment" })</span><em>6 waiting at Shipment created at Parcelo</em></div></div>
+      <div class="ln a">Parcelo has answered 502 since 13:21. Six deliveries are waiting and will retry on their own. Nothing to requeue yet; if it lasts past an hour, lower parcelo.ship's concurrency.</div>
+    </div>
+  </div>
+</section>
+
+<div class="daybreak" aria-hidden="true"><canvas id="dawnPx"></canvas></div>
+
+<!-- 6. Redaction -->
+<section class="sec day red" id="secure">
+  <div class="wrap">
+    <div class="head">
+      <h2>Secrets stop at ingest.</h2>
+      <p>Redaction runs before anything is stored, so nothing downstream ever sees the raw value. Type one in.</p>
+    </div>
+    <div class="ledbox" aria-label="Attributes passing the ingest gate">
+      <div class="lh"><span><b>What your app sends</b></span><span><b>What Vigie stores</b></span></div>
+      <canvas id="led" aria-hidden="true"></canvas>
+    </div>
+    <div class="grid">
+      <div class="pan">
+        <div class="fh"><b>What your app sends</b><span>editable</span></div>
+        <textarea id="redIn" spellcheck="false" aria-label="Attributes your app sends">password=hunter2
+authorization=Bearer eyJhbGciOiJIUzI1NiJ9.e30
+http.url=/reset-password/8f3c2a1b9d
+customer.email=claire.martin@acme.fr
+billing.card=4242 4242 4242 4242
+apiKey.id=key_31
+session.code=RS6731-B2</textarea>
+      </div>
+      <div class="pan dark">
+        <div class="fh"><b>What Vigie stores</b><span id="redCount"></span></div>
+        <div class="res" id="redOut" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="rules" id="rules">
+      <div><b data-r="secret-keys">0</b><span>secret field names</span></div>
+      <div><b data-r="secret-paths">0</b><span>paths with a secret</span></div>
+      <div><b data-r="emails">0</b><span>emails in values</span></div>
+      <div><b data-r="cards">0</b><span>card numbers</span></div>
+    </div>
+    <ul class="guards">
+      <li><b>ClickHouse has no published port.</b> Vigie runs as a non-root user on a read-only filesystem.</li>
+      <li><b>Keys are hashed at rest.</b> Ingest keys, API tokens and MCP tokens are shown once.</li>
+      <li><b>Sign-up closes after the first owner,</b> who needs a one-time code from the logs.</li>
+      <li><b>Raw SQL is refused</b> if Vigie's database role can read credentials.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 7. Run it -->
+<section class="sec day start" id="start">
+  <div class="wrap grid">
+    <div>
+      <div class="head">
+        <h2>Running before your coffee cools.</h2>
+        <p>One command starts Vigie. ClickHouse comes from an installed binary, Docker, or a download, and ports that are taken move to the next free one.</p>
+      </div>
+      <ol class="runsteps">
+        <li><b>Run Vigie.</b> On your machine with no sign-in, or on a server with HTTPS.</li>
+        <li><b>Connect your app.</b> The installer finds Vigie, writes the env, and links the app in the browser, so nobody copies a key.</li>
+        <li><b>Open a request.</b> Every request, error and job is one event, joined to its trace.</li>
+      </ol>
+    </div>
+    <div class="shells">
+      <div class="shell">
+        <div class="tabs" role="tablist" aria-label="Where to run it" data-group="run">
+          <button class="tab" role="tab" aria-selected="true" data-s="local">On your machine</button>
+          <button class="tab" role="tab" aria-selected="false" data-s="server">On a server</button>
+        </div>
+        <div class="spane on" data-g="run" data-sp="local">
+          <div class="cl"><code>bunx @vigiejs/cli --seed</code><button class="copy" data-copy="bunx @vigiejs/cli --seed" aria-label="Copy the start command"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></div>
+          <p class="cm"># the app on http://localhost:5310, ingest on :4318
+# --seed sends a day of realistic telemetry
+# no sign-in, listens on this machine only</p>
+        </div>
+        <div class="spane" data-g="run" data-sp="server">
+          <div class="cl"><code>deploy/install.sh --domain vigie.example.com</code><button class="copy" data-copy="deploy/install.sh --domain vigie.example.com" aria-label="Copy the server install"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></div>
+          <p class="cm"># Docker, ClickHouse and HTTPS from Caddy
+# prints the owner's setup code and the first ingest key</p>
+        </div>
+      </div>
+      <div class="shell">
+        <div class="tabs" role="tablist" aria-label="Connect your app" data-group="app">
+          <button class="tab" role="tab" aria-selected="true" data-s="adonis">Adonis</button>
+          <button class="tab" role="tab" aria-selected="false" data-s="nestjs">NestJS</button>
+          <button class="tab" role="tab" aria-selected="false" data-s="any">Any stack</button>
+        </div>
+        <div class="spane on" data-g="app" data-sp="adonis">
+          <div class="cl"><code>node ace add @vigiejs/adonis</code><button class="copy" data-copy="node ace add @vigiejs/adonis" aria-label="Copy the Adonis installer"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></div>
+          <p class="cm"># traces from @adonisjs/otel, one wide event per request
+# background work through task()</p>
+        </div>
+        <div class="spane" data-g="app" data-sp="nestjs">
+          <div class="cl"><code>npx @vigiejs/nestjs init</code><button class="copy" data-copy="npx @vigiejs/nestjs init" aria-label="Copy the NestJS installer"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></div>
+          <p class="cm"># adds VigieModule.forRoot() and the trace register
+# @VigieTask() on BullMQ processors and crons</p>
+        </div>
+        <div class="spane" data-g="app" data-sp="any">
+          <div class="cl"><code>OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318</code><button class="copy" data-copy="OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318" aria-label="Copy the OpenTelemetry endpoint"><svg aria-hidden="true" class="cp-i"><use href="#i-copy"/></svg><svg aria-hidden="true" class="ok-i"><use href="#i-ok"/></svg></button></div>
+          <p class="cm"># any OpenTelemetry SDK, any language
+# a log with method, status and durationMs is a request</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="foot">
+  <div class="sunrise" aria-hidden="true"><canvas id="sunPx"></canvas></div>
+  <div class="wrap mast">
+    <div>
+      <div class="big">Vigie</div>
+      <p class="note">French for the lookout. It keeps the watch so you can sleep.</p>
+    </div>
+    <ul>
+      <li><a href="/docs/getting-started/introduction">Getting started</a></li>
+      <li><a href="/docs/definitions/overview">Definitions API</a></li>
+      <li><a href="/docs/connect/adonis">Connect an app</a></li>
+      <li><a href="/docs/features/mcp">MCP</a></li>
+      <li><a href="/docs/self-hosting/deploy">Self-hosting</a></li>
+      <li><a href="https://github.com/ChronicStone/vigie">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- README banner, shown at #banner -->
+<div class="bstage" id="bstage" aria-hidden="true">
+  <div class="banner" id="banner">
+    <canvas id="bsea"></canvas>
+    <div class="bt">
+      <span class="mark"><svg aria-hidden="true"><use href="#i-mark"/></svg>Vigie</span>
+      <p>Self-hosted telemetry for Node apps, on OpenTelemetry and ClickHouse.</p>
+      <span class="fw"><b>Adonis</b><b>NestJS</b><b>any OpenTelemetry stack</b></span>
+      <span class="cmd"><b>bunx @vigiejs/cli --seed</b></span>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,7 @@
-// The landing page is hand-written HTML: it becomes the site's front page.
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 const out = '.output/public'
 const site = 'https://vigie.chronicstone.dev'
-
-copyFileSync('public/landing.html', `${out}/index.html`)
-console.log(`landing copied to ${out}/index.html`)
 
 // Search engines need absolute URLs, and the landing page belongs in the sitemap too.
 const sitemap = `${out}/sitemap.xml`

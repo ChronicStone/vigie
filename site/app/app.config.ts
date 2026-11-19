@@ -23,7 +23,6 @@ export default defineAppConfig({
   ui: {
     colors: { primary: 'coral', neutral: 'slate' },
   },
-  navigation: { sub: 'header' },
   toc: {
     title: 'On this page',
     bottom: {
