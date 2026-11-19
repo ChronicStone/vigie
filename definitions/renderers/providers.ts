@@ -1,4 +1,4 @@
-import { defineLogRenderer, ui } from "vigie/sdk";
+import { defineLogRenderer, ui } from "@vigiejs/sdk";
 
 export const parcelo = defineLogRenderer({
   id: "parcelo",

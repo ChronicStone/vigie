@@ -1,18 +1,18 @@
-import { defineCatalog } from "vigie/sdk";
+import { defineCatalog } from "@vigiejs/sdk";
 
 /** What only the app knows: provider names, the task catalogue, the retry ladder, objectives and production rules. */
 export default defineCatalog({
   lateAfterSeconds: 300,
   retryLadder: ["1 min", "5 min", "30 min", "2 h", "6 h", "12 h", "1 d"],
   providers: {
-    "api.parcelo.dev": "Parcelo",
-    "api.paynest.dev": "Paynest",
-    "api.invoxa.dev": "Invoxa",
-    "api.postwing.dev": "Postwing",
-    "api.pipedeck.dev": "Pipedeck",
-    "api.taxbox.dev": "Taxbox",
-    "api.registry.dev": "Company register",
-    "api.parcelo.dev:443": "Parcelo",
+    "api.parcelo.example": "Parcelo",
+    "api.paynest.example": "Paynest",
+    "api.invoxa.example": "Invoxa",
+    "api.postwing.example": "Postwing",
+    "api.pipedeck.example": "Pipedeck",
+    "api.taxbox.example": "Taxbox",
+    "api.registry.example": "Company register",
+    "api.parcelo.example:443": "Parcelo",
   },
   tasks: {
     "parcelo.ship": { integration: "parcelo", switch: "parcelo.ship", serial: "shipment", concurrency: 4, handler: "parcelo/handlers/ship.handler.ts" },
@@ -67,8 +67,8 @@ export default defineCatalog({
   ],
   rules: [
     { id: "customers-account", name: "GET /v1/customers runs SELECT account at most 3 times", entry: { method: "GET", route: "/v1/customers" }, statement: 'FROM "account"', atMost: 3 },
-    { id: "deliver-once", name: "Task parcelo.ship calls Parcelo exactly once per attempt", entry: { taskKind: "parcelo.ship" }, host: "api.parcelo.dev", exactly: 1 },
+    { id: "deliver-once", name: "Task parcelo.ship calls Parcelo exactly once per attempt", entry: { taskKind: "parcelo.ship" }, host: "api.parcelo.example", exactly: 1 },
     { id: "register-queries", name: "POST /v1/orders/:id/checkout runs at most 20 queries", entry: { method: "POST", route: "/v1/orders/:id/checkout" }, atMost: 20 },
-    { id: "ses-calls", name: "Task emails.delivery-check calls Postwing at most 200 times", entry: { taskKind: "emails.delivery-check" }, host: "api.postwing.dev", atMost: 200 },
+    { id: "ses-calls", name: "Task emails.delivery-check calls Postwing at most 200 times", entry: { taskKind: "emails.delivery-check" }, host: "api.postwing.example", atMost: 200 },
   ],
 });

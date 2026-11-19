@@ -2,7 +2,7 @@ export default defineAppConfig({
   docus: {
     name: 'Vigie',
     description: 'Self-hosted telemetry for Node apps: logs, traces, tasks, alerts, a status page and MCP, on OpenTelemetry and ClickHouse.',
-    url: 'https://vigie-docs.vercel.app',
+    url: 'https://vigie.chronicstone.dev',
   },
   seo: {
     titleTemplate: '%s · Vigie',

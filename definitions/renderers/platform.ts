@@ -1,4 +1,4 @@
-import { defineErrorRenderer, defineLogRenderer, link, ui } from "vigie/sdk";
+import { defineErrorRenderer, defineLogRenderer, link, ui } from "@vigiejs/sdk";
 
 export const database = defineLogRenderer({
   id: "database",

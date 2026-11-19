@@ -1,4 +1,4 @@
-import { defineProcess, step } from "vigie/sdk";
+import { defineProcess, step } from "@vigiejs/sdk";
 
 export const fulfilment = defineProcess({
   id: "order-fulfilment",

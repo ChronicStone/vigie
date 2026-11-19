@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * `npx @vigiejs/nestjs init`: everything a Nest app needs to send its telemetry to Vigie.
- * In CI: `npx @vigiejs/nestjs init --url=https://vigie.acme.dev --key=vk_…`.
+ * In CI: `npx @vigiejs/nestjs init --url=https://vigie.example.com --key=vk_…`.
  */
 import { spawn, spawnSync } from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -257,7 +257,7 @@ async function main() {
 const invoked = process.argv[1] && /init\.(js|ts)$|vigie-nestjs$/.test(process.argv[1])
 if (invoked) {
   if (process.argv[2] && process.argv[2] !== 'init' && !process.argv[2].startsWith('--')) {
-    console.log('Usage: npx @vigiejs/nestjs init [--url=https://vigie.acme.dev] [--key=vk_…] [--no-install]')
+    console.log('Usage: npx @vigiejs/nestjs init [--url=https://vigie.example.com] [--key=vk_…] [--no-install]')
     process.exit(1)
   }
   main().catch((error: Error) => {

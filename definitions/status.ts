@@ -1,4 +1,4 @@
-import { defineStatusPage } from "vigie/sdk";
+import { defineStatusPage } from "@vigiejs/sdk";
 import { api, app, shop } from "./monitors/acme.ts";
 
 /** What customers see at /status. Provider alerts stay off: an outage at Parcelo is not ours to announce. */

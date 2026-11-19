@@ -1,4 +1,4 @@
-import { defineAlert } from "vigie/sdk";
+import { defineAlert } from "@vigiejs/sdk";
 
 export const taskFailureRate = defineAlert({ id: "task-failure-rate", name: "Task failure rate", family: "Tasks", when: { source: "task-failure-rate" }, above: 5, window: "15m", unit: "%", condition: "Failed attempts above 5% over 15 min" });
 export const oldestDue = defineAlert({ id: "oldest-due", name: "Tasks waiting too long", family: "Tasks", when: { source: "oldest-due" }, above: 300, window: "5m", for: "5m", unit: "s", condition: "Oldest due task above 5 min for 5 min" });

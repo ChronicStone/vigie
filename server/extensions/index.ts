@@ -10,7 +10,7 @@ import { eventView, type ChannelDefinition, type EnricherDefinition, type Health
  * the definitions folder is read with its SDK import pointed at this checkout's SDK.
  */
 const SDK_PATH = join(import.meta.dir, "..", "..", "sdk", "index.ts");
-const SDK_IMPORT = /(from\s*|import\s*\(\s*)(["'])(?:vigie\/sdk|@vigie\/sdk|vigie|@sdk)\2/g;
+const SDK_IMPORT = /(from\s*|import\s*\(\s*)(["'])(?:@vigiejs\/sdk|vigie\/sdk|@vigie\/sdk|vigie|@sdk)\2/g;
 const definitionsReal = (() => {
   try {
     return realpathSync(config.definitionsDir);

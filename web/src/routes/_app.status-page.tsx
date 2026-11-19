@@ -29,7 +29,7 @@ const SECTIONS = [
 function asCode(draft: Draft, isPublic: boolean) {
   const q = (s: string) => JSON.stringify(s);
   const lines = [
-    'import { defineStatusPage } from "vigie/sdk";',
+    'import { defineStatusPage } from "@vigiejs/sdk";',
     "",
     "export const status = defineStatusPage({",
     ...(draft.title ? [`  title: ${q(draft.title)},`] : []),

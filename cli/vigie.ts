@@ -278,7 +278,7 @@ const commands: Record<string, () => Promise<void>> = {
     console.log(result.ok ? `\nWithin limits: ${result.rows.length} rows.` : `\nNot within limits: ${result.rows.filter((r) => !r.ok).length} of ${result.rows.length} rows, ${result.failed.length} checks could not run.`);
     process.exit(result.ok ? 0 : 1);
   },
-  /** Declares a release from CI: vigie deploy --url https://vigie.you.com --token vd_… --service api --version $SHA */
+  /** Declares a release from CI: vigie deploy --url https://vigie.example.com --token vd_… --service api --version $SHA */
   async deploy() {
     const values = flags({ url: { type: "string" }, token: { type: "string" }, service: { type: "string" }, version: { type: "string" }, env: { type: "string" } });
     const response = await fetch(`${values.url ?? process.env.VIGIE_URL}/api/deployments`, { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${values.token ?? process.env.VIGIE_DEPLOY_TOKEN}` }, body: JSON.stringify({ service: values.service, version: values.version, environment: values.env ?? "PRD" }) });

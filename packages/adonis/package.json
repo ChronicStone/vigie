@@ -54,5 +54,8 @@
     "url": "git+https://github.com/ChronicStone/vigie.git",
     "directory": "packages/adonis"
   },
-  "homepage": "https://vigie-docs.vercel.app"
+  "homepage": "https://vigie.chronicstone.dev",
+  "publishConfig": {
+    "access": "public"
+  }
 }

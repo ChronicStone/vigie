@@ -1,0 +1,20 @@
+{
+  "name": "@vigiejs/sdk",
+  "version": "0.1.0",
+  "description": "Typed definitions for Vigie: defineAlert, defineProcess, defineStatusPage and the rest, for the definitions/ folder of your app.",
+  "license": "MIT",
+  "type": "module",
+  "files": ["build", "README.md", "LICENSE"],
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "exports": { ".": { "types": "./build/index.d.ts", "default": "./build/index.js" } },
+  "scripts": {
+    "build": "rm -rf build && tsc -p tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "keywords": ["vigie", "observability", "telemetry", "opentelemetry", "definitions"],
+  "repository": { "type": "git", "url": "git+https://github.com/ChronicStone/vigie.git", "directory": "packages/sdk" },
+  "homepage": "https://vigie.chronicstone.dev/docs/definitions/overview",
+  "publishConfig": { "access": "public" },
+  "devDependencies": { "typescript": "5.9.3" }
+}

@@ -77,7 +77,7 @@ async function sendTestEvent(vigie: Found, key: string, service: string) {
 }
 
 /**
- * `node ace add @vigiejs/adonis`, or `node ace configure @vigiejs/adonis --url=https://vigie.acme.com --key=vg_…` in CI.
+ * `node ace add @vigiejs/adonis`, or `node ace configure @vigiejs/adonis --url=https://vigie.example.com --key=vk_…` in CI.
  */
 export async function configure(command: Configure) {
   const flags = command.parsedFlags as { url?: string; key?: string }

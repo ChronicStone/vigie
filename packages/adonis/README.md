@@ -11,7 +11,7 @@ That is the whole setup. It finds the Vigie running on your machine (or asks whe
 In CI, or anywhere without a browser:
 
 ```sh
-node ace configure @vigiejs/adonis --url=https://vigie.acme.com --key=vk_…
+node ace configure @vigiejs/adonis --url=https://vigie.example.com --key=vk_…
 ```
 
 ## What you get

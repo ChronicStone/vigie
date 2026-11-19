@@ -1,4 +1,4 @@
-import { defineDashboard } from "vigie/sdk";
+import { defineDashboard } from "@vigiejs/sdk";
 
 const requests = "FROM logs WHERE $__timeFilter(Timestamp) AND Environment = $__env AND Kind = 'request'";
 const tasks = "FROM logs WHERE $__timeFilter(Timestamp) AND Environment = $__env AND Kind = 'task'";

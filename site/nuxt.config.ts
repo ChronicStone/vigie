@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   site: {
     name: 'Vigie',
-    url: 'https://vigie-docs.vercel.app',
+    url: 'https://vigie.chronicstone.dev',
   },
   nitro: {
     prerender: {

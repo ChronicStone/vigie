@@ -140,12 +140,12 @@ function request(batch: Batch, t: number, environment: string, instance: string)
   if (refused) {
     const start = t + duration * 0.25;
     const d = duration * 0.62;
-    add(batch.spans, key, span(trace, root.spanId, "POST api.parcelo.dev", 3, start, d, { "http.request.method": "POST", "url.full": "https://api.parcelo.dev/v2/shipments", "server.address": "api.parcelo.dev", "http.response.status_code": 412, "parcelo.operation": "createShipment" }, "412 ADDRESS_UNDELIVERABLE"));
+    add(batch.spans, key, span(trace, root.spanId, "POST api.parcelo.example", 3, start, d, { "http.request.method": "POST", "url.full": "https://api.parcelo.example/v2/shipments", "server.address": "api.parcelo.example", "http.response.status_code": 412, "parcelo.operation": "createShipment" }, "412 ADDRESS_UNDELIVERABLE"));
     Object.assign(attributes, {
       reason: "PARCELO_ADDRESS_REFUSED",
       why: "Parcelo refused the shipment: the address cannot be delivered with EXPRESS48.",
       fix: "Fix the address on the order, or ship it with another service.",
-      link: "https://docs.acme.dev/parcelo#one-label-per-order",
+      link: "https://docs.acme.example/parcelo#one-label-per-order",
       "error.name": "ParceloAddressRefused",
       "error.message": "412 ADDRESS_UNDELIVERABLE on EXPRESS48",
       "error.stack": "ParceloAddressRefused: 412 ADDRESS_UNDELIVERABLE on EXPRESS48\n    at ShipmentService.create (app/modules/parcelo/services/shipment.service.ts:152:13)\n    at OrdersController.checkout (app/modules/orders/controllers/shipments.controller.ts:88:5)",
@@ -256,7 +256,7 @@ function orderFlow(batch: Batch, t: number, environment: string) {
     number: 1,
     integration: "paynest",
     duration: ingestDur,
-    host: "api.paynest.dev",
+    host: "api.paynest.example",
     method: "GET",
     path: "/v1/payments",
     fails: ingestFails ? { type: "fail", code: "PAYNEST_AMOUNT_MISMATCH", why: "The amount paid does not match the order.", fix: "Check the payment on Paynest, then requeue this task.", errorName: "PaynestAmountMismatch", message: "Amount does not match the order", status: 200 } : undefined,
@@ -276,7 +276,7 @@ function orderFlow(batch: Batch, t: number, environment: string) {
     number: 1,
     integration: "platform",
     duration: 120 + rand(300),
-    host: "api.postwing.dev",
+    host: "api.postwing.example",
     method: "POST",
     path: "/v2/email/outbound-emails",
     fails: refused ? { type: "fail", code: "POSTWING_THROTTLED", why: "Postwing refused the send: maximum sending rate exceeded.", fix: "Requeue this task. Raise the Postwing quota if it repeats.", errorName: "Throttling", message: "Maximum sending rate exceeded", status: 429 } : undefined,
@@ -295,7 +295,7 @@ function orderFlow(batch: Batch, t: number, environment: string) {
       number,
       integration: "parcelo",
       duration: d,
-      host: "api.parcelo.dev",
+      host: "api.parcelo.example",
       method: "POST",
       path: "/v2/shipments",
       fails,
@@ -305,25 +305,25 @@ function orderFlow(batch: Batch, t: number, environment: string) {
   proc(1, at, limited ? RATE_LIMIT : undefined);
   // Mostly it recovers a minute later. Recent ones are still waiting, which is what "stuck" looks like.
   if (limited && Date.now() - t > 3_600_000) proc(2, at + 60_000 + rand(4000));
-  if (rand() < 0.2) taskAttempt(batch, at + 200, environment, { ...shared, trace: hex(16), kind: "tax.declare", taskId: `tsk_${hex(6)}`, number: 1, integration: "taxbox", duration: 300 + rand(900), host: "api.taxbox.dev", method: "POST", path: "/v1/declarations" });
+  if (rand() < 0.2) taskAttempt(batch, at + 200, environment, { ...shared, trace: hex(16), kind: "tax.declare", taskId: `tsk_${hex(6)}`, number: 1, integration: "taxbox", duration: 300 + rand(900), host: "api.taxbox.example", method: "POST", path: "/v1/declarations" });
 }
 
 function billingFlow(batch: Batch, t: number, environment: string) {
   const user = pick(USERS);
   const key = `invoice:${id26()}`;
   const bad = rand() < 0.16;
-  taskAttempt(batch, t, environment, { key, account: user[2], trace: hex(16), kind: "invoxa.customer.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "invoxa", duration: 400 + rand(1500), host: "api.invoxa.dev", method: "POST", path: "/api/v1/clients", fails: bad ? COUNTRY : undefined, extra: { "invoxa.operation": "createClient", "invoxa.client": `cli_${hex(3)}` } });
-  if (!bad) taskAttempt(batch, t + 1800, environment, { key, account: user[2], trace: hex(16), kind: "invoxa.invoices.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "invoxa", duration: 300 + rand(900), host: "api.invoxa.dev", method: "POST", path: "/api/v1/invoices", extra: { "invoxa.operation": "pushInvoice", "emails.sent": rand() < 0.3 ? 1 : 0, "emails.template": "invoice-issued" } });
+  taskAttempt(batch, t, environment, { key, account: user[2], trace: hex(16), kind: "invoxa.customer.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "invoxa", duration: 400 + rand(1500), host: "api.invoxa.example", method: "POST", path: "/api/v1/clients", fails: bad ? COUNTRY : undefined, extra: { "invoxa.operation": "createClient", "invoxa.client": `cli_${hex(3)}` } });
+  if (!bad) taskAttempt(batch, t + 1800, environment, { key, account: user[2], trace: hex(16), kind: "invoxa.invoices.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "invoxa", duration: 300 + rand(900), host: "api.invoxa.example", method: "POST", path: "/api/v1/invoices", extra: { "invoxa.operation": "pushInvoice", "emails.sent": rand() < 0.3 ? 1 : 0, "emails.template": "invoice-issued" } });
 }
 
 const CLOCKS: [string, number, string, string, string, string, number][] = [
-  ["paynest.scan", 5, "paynest", "api.paynest.dev", "GET", "/v1/scan", 1800],
-  ["parcelo.tracking.read", 5, "parcelo", "api.parcelo.dev", "GET", "/v2/shipments", 2600],
-  ["emails.delivery-check", 15, "platform", "api.postwing.dev", "POST", "/v2/insights", 1100],
+  ["paynest.scan", 5, "paynest", "api.paynest.example", "GET", "/v1/scan", 1800],
+  ["parcelo.tracking.read", 5, "parcelo", "api.parcelo.example", "GET", "/v2/shipments", 2600],
+  ["emails.delivery-check", 15, "platform", "api.postwing.example", "POST", "/v2/insights", 1100],
   ["carts.sweep", 15, "platform", "", "", "", 280],
   ["webhooks.collect", 5, "platform", "", "", "", 140],
   ["billing.invoices.overdue", 1440, "platform", "", "", "", 900],
-  ["accounts.company-register.refresh", 1440, "platform", "api.registry.dev", "GET", "/v1/companies", 2400],
+  ["accounts.company-register.refresh", 1440, "platform", "api.registry.example", "GET", "/v1/companies", 2400],
   ["tasks.reconcile", 1440, "platform", "", "", "", 420],
   ["tasks.maintenance", 1440, "platform", "", "", "", 880],
 ];
@@ -370,14 +370,14 @@ function extras(batch: Batch, t: number, environment: string) {
   if (rand() < 0.08) {
     const user = pick(USERS);
     const key2 = `acme-worker|worker-1|${environment}|${versionAt(t)}`;
-    taskAttempt(batch, t, environment, { key: `company:${hex(3)}`, trace: hex(16), kind: "pipedeck.company.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "pipedeck", duration: 200 + rand(700), host: "api.pipedeck.dev", method: "POST", path: "/crm/v3/objects/companies", account: user[2] });
+    taskAttempt(batch, t, environment, { key: `company:${hex(3)}`, trace: hex(16), kind: "pipedeck.company.sync", taskId: `tsk_${hex(6)}`, number: 1, integration: "pipedeck", duration: 200 + rand(700), host: "api.pipedeck.example", method: "POST", path: "/crm/v3/objects/companies", account: user[2] });
     void key2;
   }
   if (rand() < 0.05) {
     const user = pick(USERS);
     taskAttempt(batch, t, environment, { key: `export:${id26()}`, trace: hex(16), kind: "exports.process", taskId: `tsk_${hex(6)}`, number: 1, integration: "platform", duration: 3000 + rand(9000), account: user[2], user: user[0] });
   }
-  if (rand() < 0.1) taskAttempt(batch, t, environment, { key: `customer:${id26()}`, trace: hex(16), kind: "paynest.customer.create", taskId: `tsk_${hex(6)}`, number: 1, integration: "paynest", duration: 300 + rand(900), host: "api.paynest.dev", method: "POST", path: "/v1/customers" });
+  if (rand() < 0.1) taskAttempt(batch, t, environment, { key: `customer:${id26()}`, trace: hex(16), kind: "paynest.customer.create", taskId: `tsk_${hex(6)}`, number: 1, integration: "paynest", duration: 300 + rand(900), host: "api.paynest.example", method: "POST", path: "/v1/customers" });
 }
 
 const VERSIONS = [

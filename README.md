@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="https://vigie-docs.vercel.app"><img src=".github/cover.png" alt="Vigie: self-hosted telemetry for Node apps, on OpenTelemetry and ClickHouse" width="100%"></a>
+  <a href="https://vigie.chronicstone.dev"><img src=".github/cover.png" alt="Vigie: self-hosted telemetry for Node apps, on OpenTelemetry and ClickHouse" width="100%"></a>
 </p>
 
 <p align="center">
-  <a href="https://vigie-docs.vercel.app/docs/getting-started/introduction"><b>Docs</b></a> ·
-  <a href="https://vigie-docs.vercel.app/docs/getting-started/quickstart">Quickstart</a> ·
-  <a href="https://vigie-docs.vercel.app/docs/definitions/overview">Definitions API</a> ·
-  <a href="https://vigie-docs.vercel.app/docs/features/mcp">MCP</a> ·
-  <a href="https://vigie-docs.vercel.app/docs/self-hosting/deploy">Self-hosting</a>
+  <a href="https://vigie.chronicstone.dev/docs/getting-started/introduction"><b>Docs</b></a> ·
+  <a href="https://vigie.chronicstone.dev/docs/getting-started/quickstart">Quickstart</a> ·
+  <a href="https://vigie.chronicstone.dev/docs/definitions/overview">Definitions API</a> ·
+  <a href="https://vigie.chronicstone.dev/docs/features/mcp">MCP</a> ·
+  <a href="https://vigie.chronicstone.dev/docs/self-hosting/deploy">Self-hosting</a>
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@ Adonis and NestJS connect with one command. Anything that speaks OpenTelemetry w
 ## Quickstart
 
 ```sh
-bunx vigie --seed
+bunx @vigiejs/cli --seed
 ```
 
 Vigie is now on `http://localhost:5310`, with a day of demo telemetry from a made-up shop. ClickHouse comes from an installed binary, Docker, or a download. No sign-in on your machine.
@@ -37,7 +37,7 @@ npx @vigiejs/nestjs init          # NestJS
 
 The installer finds Vigie, sets up traces, writes `VIGIE_URL` and `VIGIE_KEY`, and sends a test event. On a server, it opens a page where someone signed in allows the app, so nobody copies a key.
 
-Anything else: `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318`. A log record with `method`, `status` and `durationMs` is a request; one with `task.kind` is a background task. [The full contract](https://vigie-docs.vercel.app/docs/connect/any-stack).
+Anything else: `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318`. A log record with `method`, `status` and `durationMs` is a request; one with `task.kind` is a background task. [The full contract](https://vigie.chronicstone.dev/docs/connect/any-stack).
 
 <p align="center">
   <img src=".github/screen-overview.png" alt="Vigie overview: traffic, what needs you, slowest routes" width="100%">
@@ -64,7 +64,7 @@ Everything specific to your app lives in `definitions/`, typed TypeScript next t
 
 ```ts
 // definitions/processes/acme.ts
-import { defineProcess, step } from 'vigie/sdk'
+import { defineProcess, step } from '@vigiejs/sdk'
 
 export const fulfilment = defineProcess({
   id: 'order-fulfilment',
@@ -89,22 +89,23 @@ export const fulfilment = defineProcess({
 | An MCP tool | `defineTool` |
 | Secrets in your paths | `defineRedactor` |
 
-[Every definition, with examples](https://vigie-docs.vercel.app/docs/definitions/overview). The ones in [`definitions/`](definitions) here describe Acme, a made-up shop, and power the demo data.
+[Every definition, with examples](https://vigie.chronicstone.dev/docs/definitions/overview). The ones in [`definitions/`](definitions) here describe Acme, a made-up shop, and power the demo data.
 
 ## On a server
 
 ```sh
 git clone https://github.com/ChronicStone/vigie.git && cd vigie
-deploy/install.sh --domain vigie.acme.dev
+deploy/install.sh --domain vigie.example.com
 ```
 
-Docker, ClickHouse and HTTPS from Caddy. It prints the setup code for the first owner and the first ingest key. Leave out `--domain` to keep it private on `127.0.0.1`, behind Tailscale or an SSH tunnel. [Deploy guide](https://vigie-docs.vercel.app/docs/self-hosting/deploy).
+Docker, ClickHouse and HTTPS from Caddy. It prints the setup code for the first owner and the first ingest key. Leave out `--domain` to keep it private on `127.0.0.1`, behind Tailscale or an SSH tunnel. [Deploy guide](https://vigie.chronicstone.dev/docs/self-hosting/deploy).
 
 ## Packages
 
 | Package | |
 |---|---|
-| [`vigie`](.) | The server, the app and the CLI. |
+| [`@vigiejs/cli`](.) | The server, the app and the `vigie` command: `bunx @vigiejs/cli --seed` |
+| [`@vigiejs/sdk`](packages/sdk) | Types for your `definitions/`: `npm i -D @vigiejs/sdk` |
 | [`@vigiejs/adonis`](packages/adonis) | `node ace add @vigiejs/adonis` |
 | [`@vigiejs/nestjs`](packages/nestjs) | `npx @vigiejs/nestjs init` |
 

@@ -29,6 +29,9 @@
       ],
       "@server/*": [
         "./server/*"
+      ],
+      "@vigiejs/sdk": [
+        "./sdk/index.ts"
       ]
     }
   },

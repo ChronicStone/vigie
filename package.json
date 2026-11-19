@@ -1,5 +1,5 @@
 {
-  "name": "vigie",
+  "name": "@vigiejs/cli",
   "version": "0.1.0",
   "type": "module",
   "description": "Self-hosted telemetry for Node apps: logs, traces, tasks, alerts, a status page and MCP, on OpenTelemetry and ClickHouse.",
@@ -74,7 +74,7 @@
     "type": "git",
     "url": "git+https://github.com/ChronicStone/vigie.git"
   },
-  "homepage": "https://vigie-docs.vercel.app",
+  "homepage": "https://vigie.chronicstone.dev",
   "keywords": [
     "observability",
     "telemetry",
@@ -89,5 +89,8 @@
   ],
   "engines": {
     "bun": ">=1.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

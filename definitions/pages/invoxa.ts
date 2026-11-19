@@ -1,4 +1,4 @@
-import { definePage, eventList, funnel, row, series, stateLine, table, ui } from "vigie/sdk";
+import { definePage, eventList, funnel, row, series, stateLine, table, ui } from "@vigiejs/sdk";
 
 const sync = `FROM logs WHERE $__timeFilter(Timestamp) AND Environment = $__env AND TaskKind LIKE 'invoxa.%'`;
 

@@ -1,4 +1,4 @@
-import { defineTool } from "vigie/sdk";
+import { defineTool } from "@vigiejs/sdk";
 
 export const blockedCustomers = defineTool({
   name: "parcelo_blocked",

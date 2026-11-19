@@ -1,4 +1,4 @@
-import { definePage, eventList, funnel, row, series, stateLine, table, ui } from "vigie/sdk";
+import { definePage, eventList, funnel, row, series, stateLine, table, ui } from "@vigiejs/sdk";
 
 const ingest = `FROM logs WHERE $__timeFilter(Timestamp) AND Environment = $__env AND TaskKind = 'paynest.payment.ingest'`;
 
@@ -22,7 +22,7 @@ export default definePage({
     }),
     row(
       table({ title: "Why payments fail", span: 6, sql: `SELECT LogAttributes['taskOutcome.reason'] AS code, count() AS attempts, any(LogAttributes['why']) AS why ${ingest} AND Outcome != 'succeeded' GROUP BY code ORDER BY attempts DESC LIMIT 10` }),
-      series({ title: "Calls to Paynest", span: 6, kind: "bars", sql: `SELECT $__bucket(Timestamp) AS t, countIf(HttpStatus < 400) AS ok, countIf(HttpStatus >= 400) AS error FROM spans WHERE $__timeFilter(Timestamp) AND Environment = $__env AND PeerHost = 'api.paynest.dev' GROUP BY t ORDER BY t` }),
+      series({ title: "Calls to Paynest", span: 6, kind: "bars", sql: `SELECT $__bucket(Timestamp) AS t, countIf(HttpStatus < 400) AS ok, countIf(HttpStatus >= 400) AS error FROM spans WHERE $__timeFilter(Timestamp) AND Environment = $__env AND PeerHost = 'api.paynest.example' GROUP BY t ORDER BY t` }),
     ),
     eventList({ title: "Failed payments", where: { "task.kind": "paynest.payment.ingest", outcome: "failed" }, limit: 12 }),
   ],

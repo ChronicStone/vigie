@@ -11,7 +11,7 @@ That is the whole setup. It installs the package, finds the Vigie running on you
 In CI, or anywhere without a browser:
 
 ```sh
-npx @vigiejs/nestjs init --url=https://vigie.acme.dev --key=vk_…
+npx @vigiejs/nestjs init --url=https://vigie.example.com --key=vk_…
 ```
 
 ## The two lines

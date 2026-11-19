@@ -1,7 +1,7 @@
 #!/bin/sh
 # Installs Vigie on a server with Docker. Safe to run again: it keeps secrets and data.
 #   deploy/install.sh                     private, on 127.0.0.1 (reach it with Tailscale or an SSH tunnel)
-#   deploy/install.sh --domain vigie.you.com   public, with HTTPS from Caddy
+#   deploy/install.sh --domain vigie.example.com   public, with HTTPS from Caddy
 set -eu
 cd "$(dirname "$0")"
 domain=""
