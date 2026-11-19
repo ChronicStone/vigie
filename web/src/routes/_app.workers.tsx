@@ -17,7 +17,7 @@ const ACTIVE = 5 * 60_000;
 const OUTCOME = (r: { outcome: string; type: string }) => {
   if (r.outcome === "succeeded") return ["Finished", "t2"];
   if (r.type === "WAIT") return ["Waiting", "t3"];
-  if (r.type === "SKIP" || r.outcome === "skipped") return ["Skipped", "t3"];
+  if (r.type === "SKIP" || r.type === "SKIPPED" || r.outcome === "skipped") return ["Skipped", "t3"];
   if (r.type === "RETRY") return ["Will retry", "warn"];
   if (r.type === "LEASE_LOST") return ["Lost its worker", "warn"];
   return [inWords(r.type || "failed"), "err"];

@@ -103,7 +103,7 @@ const redactedJson = (value: unknown) => JSON.stringify(value ?? null, (key, ite
 function taskState(row: { outcome: string; type: string }): RunState {
   if (row.outcome === "succeeded") return "DONE";
   // A skip is the task deciding there is nothing to do. It is not a failure and must never read as one.
-  if (row.type === "SKIP") return "SKIPPED";
+  if (row.type === "SKIP" || row.type === "SKIPPED") return "SKIPPED";
   if (row.type === "CANCELLED") return "CANCELLED";
   if (row.type === "RETRY" || row.type === "WAIT" || row.type === "AGAIN" || row.type === "LEASE_LOST" || row.type === "REQUEUED") return "WAITING";
   return row.outcome === "skipped" ? "SKIPPED" : "FAILED";

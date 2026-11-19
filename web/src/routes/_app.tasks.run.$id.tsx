@@ -73,7 +73,7 @@ const reasonOf = (attempt: Attempt) => attempt.code || attempt.reason;
 
 function toneOf(attempt: Attempt): Tone {
   if (attempt.outcome === "succeeded") return "ok";
-  if (attempt.type === "SKIP" || attempt.type === "CANCELLED" || attempt.type === "REQUEUED") return "skip";
+  if (attempt.type === "SKIP" || attempt.type === "SKIPPED" || attempt.type === "CANCELLED" || attempt.type === "REQUEUED") return "skip";
   if (attempt.type === "WAIT" || attempt.type === "AGAIN") return "skip";
   if (attempt.type === "RETRY" || attempt.type === "LEASE_LOST") return "warn";
   return attempt.outcome === "skipped" ? "skip" : "err";

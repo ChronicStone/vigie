@@ -53,3 +53,12 @@ test("environments: a server has Prod and Test, a machine has one Local, and unk
   expect(normalizeEnvironment("production", local)).toBe("DEV");
   expect(normalizeEnvironment("staging", local)).toBe("DEV");
 });
+
+test("task outcome types from the packages read like the app's own", async () => {
+  const { canonicalOutcome } = await import("../../server/ingest/normalize.ts");
+  for (const [sent, stored] of [["SKIPPED", "SKIP"], ["FAILED", "FAIL"], ["SUCCEEDED", "DONE"], ["RETRY", "RETRY"], ["skipped", "SKIP"]]) {
+    const attrs: Record<string, string> = { "taskOutcome.type": sent };
+    canonicalOutcome(attrs);
+    expect(attrs["taskOutcome.type"]).toBe(stored);
+  }
+});

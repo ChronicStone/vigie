@@ -13,9 +13,9 @@ export const Route = createFileRoute("/_app/tasks/kind/$kind")({ component: Kind
 const DUR = [{ key: "p50", label: "p50", color: "var(--t3)" }, { key: "p95", label: "p95", color: "var(--a)" }];
 const OUTCOMES = [{ key: "done", label: "Finished", color: "var(--a)" }, { key: "skipped", label: "Skipped", color: "var(--t4)" }, { key: "error", label: "Failed", color: "var(--err)" }];
 
-const TYPE_WORD: Record<string, [string, string]> = { SKIP: ["Skipped", "t3"], WAIT: ["Waited", "t3"], AGAIN: ["Ran again", "t3"], RETRY: ["Retried", "warn"], FAIL: ["Failed", "err"], LEASE_LOST: ["Lost its worker", "warn"], CANCELLED: ["Cancelled", "t3"], REQUEUED: ["Requeued", "t3"] };
+const TYPE_WORD: Record<string, [string, string]> = { SKIP: ["Skipped", "t3"], SKIPPED: ["Skipped", "t3"], WAIT: ["Waited", "t3"], AGAIN: ["Ran again", "t3"], RETRY: ["Retried", "warn"], FAIL: ["Failed", "err"], LEASE_LOST: ["Lost its worker", "warn"], CANCELLED: ["Cancelled", "t3"], REQUEUED: ["Requeued", "t3"] };
 /** What needs a person comes first, what the task simply decided comes last. */
-const WEIGHT: Record<string, number> = { FAIL: 0, RETRY: 1, LEASE_LOST: 2, WAIT: 3, SKIP: 4, AGAIN: 5, REQUEUED: 6, CANCELLED: 7 };
+const WEIGHT: Record<string, number> = { FAIL: 0, RETRY: 1, LEASE_LOST: 2, WAIT: 3, SKIP: 4, SKIPPED: 4, AGAIN: 5, REQUEUED: 6, CANCELLED: 7 };
 
 function KindPage() {
   const { kind } = Route.useParams();

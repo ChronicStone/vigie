@@ -9,12 +9,12 @@ export const jobs = defineDashboard({
   title: "Jobs and queues",
   widgets: [
     { type: "stat", title: "Attempts", span: 3, sql: `SELECT count() AS v ${tasks}` },
-    { type: "stat", title: "Due now", span: 3, sql: `SELECT argMax(Value, TimeUnix) AS v FROM metrics_gauge WHERE $__timeFilter(TimeUnix) AND Environment = $__env AND MetricName = 'vigie.tasks.backlog' AND Attributes['state'] = 'due'` },
+    { type: "stat", title: "Due now", span: 3, sql: `SELECT argMax(Value, TimeUnix) AS v FROM metrics_gauge WHERE $__timeFilter(TimeUnix) AND Environment = $__env AND MetricName = 'vigie.tasks.backlog' AND Attributes['task.state'] = 'due'` },
     { type: "stat", title: "Oldest overdue", span: 3, unit: "s", sql: `SELECT argMax(Value, TimeUnix) AS v FROM metrics_gauge WHERE $__timeFilter(TimeUnix) AND Environment = $__env AND MetricName = 'vigie.tasks.oldest_due_age'` },
     { type: "stat", title: "Failed attempts", span: 3, tone: "error", sql: `SELECT countIf(Outcome != 'succeeded') AS v ${tasks}` },
     { type: "bars", title: "Attempts by outcome", span: 7, height: 170, sql: `SELECT $__bucket(Timestamp) AS t, countIf(Outcome = 'succeeded') AS ok, countIf(Outcome != 'succeeded') AS error ${tasks} GROUP BY t ORDER BY t` },
     { type: "list", title: "Failed attempts by kind", span: 5, height: 170, sql: `SELECT TaskKind AS label, countIf(Outcome != 'succeeded') AS value ${tasks} GROUP BY label HAVING value > 0 ORDER BY value DESC LIMIT 6` },
-    { type: "lines", title: "Backlog", span: 6, height: 150, sql: `SELECT $__bucket(TimeUnix) AS t, avgIf(Value, Attributes['state'] = 'due') AS due, avgIf(Value, Attributes['state'] = 'running') AS running FROM metrics_gauge WHERE $__timeFilter(TimeUnix) AND Environment = $__env AND MetricName = 'vigie.tasks.backlog' GROUP BY t ORDER BY t` },
+    { type: "lines", title: "Backlog", span: 6, height: 150, sql: `SELECT $__bucket(TimeUnix) AS t, avgIf(Value, Attributes['task.state'] = 'due') AS due, avgIf(Value, Attributes['task.state'] = 'running') AS running FROM metrics_gauge WHERE $__timeFilter(TimeUnix) AND Environment = $__env AND MetricName = 'vigie.tasks.backlog' GROUP BY t ORDER BY t` },
     { type: "table", title: "Recent failures", span: 6, height: 150, sql: `SELECT TaskKind AS kind, LogAttributes['taskOutcome.reason'] AS code, count() AS n ${tasks} AND Outcome != 'succeeded' GROUP BY kind, code ORDER BY n DESC LIMIT 6` },
   ],
 });

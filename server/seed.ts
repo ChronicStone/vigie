@@ -413,7 +413,7 @@ function metricsPayload(t: number, environment: string) {
       },
     ];
     if (service === "acme-worker" && instance === "worker-1") {
-      for (const [state, value] of [["due", 8 + rand(14)], ["scheduled", 170 + rand(30)], ["running", 2 + rand(5)], ["held", 2]] as const) metrics.push(gauge("vigie.tasks.backlog", "tasks", "Tasks by state", value, { state }));
+      for (const [state, value] of [["due", 8 + rand(14)], ["scheduled", 170 + rand(30)], ["running", 2 + rand(5)], ["held", 2]] as const) metrics.push(gauge("vigie.tasks.backlog", "tasks", "Tasks by state", value, { "task.state": state }));
       metrics.push(gauge("vigie.tasks.oldest_due_age", "s", "Age of the oldest task waiting for a worker", 4 + rand(20)));
     }
     resources.push({ resource: resource(service, instance, environment), scopeMetrics: [{ scope: { name: "vigie-seed" }, metrics }] });

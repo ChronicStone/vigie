@@ -137,6 +137,13 @@ function severity(record: any) {
   return { text: LEVELS.find(([min]) => number >= min)?.[1] ?? "info", number };
 }
 
+/** The packages and the docs say SUCCEEDED, FAILED, SKIPPED; the screens read DONE, FAIL, SKIP. One vocabulary, set at ingest. */
+const OUTCOME_TYPES: Record<string, string> = { SUCCEEDED: "DONE", SUCCESS: "DONE", FAILED: "FAIL", SKIPPED: "SKIP" };
+export function canonicalOutcome(attributes: Record<string, string>) {
+  const type = attributes["taskOutcome.type"];
+  if (type && OUTCOME_TYPES[type.toUpperCase()]) attributes["taskOutcome.type"] = OUTCOME_TYPES[type.toUpperCase()]!;
+}
+
 export function normalizeLogs(payload: any, forcedEnvironment?: string) {
   const rows: any[] = [];
   for (const rl of payload.resourceLogs ?? []) {
@@ -144,6 +151,7 @@ export function normalizeLogs(payload: any, forcedEnvironment?: string) {
     for (const scope of rl.scopeLogs ?? []) {
       for (const record of scope.logRecords ?? []) {
         const attributes = redactMap(flatten(record.attributes));
+        canonicalOutcome(attributes);
         const raw = plain(record.body);
         // evlog's compact records fall back to the service name as the line: its own `message` reads better.
         const body = (raw === "" || raw === resource.service) && attributes.message ? attributes.message : raw;

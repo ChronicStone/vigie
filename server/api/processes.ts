@@ -111,7 +111,8 @@ async function instancesOf(process: Process, scope: Scope, limit = 5000, key?: s
       kind: row.kind,
       attempts: row.attempts,
       done: Boolean(row.done),
-      skipped: !row.done && row.type === "SKIP",
+      // The packages send SKIPPED; older apps sent SKIP.
+      skipped: !row.done && (row.type === "SKIP" || row.type === "SKIPPED"),
       failed: !row.done && row.outcome === "failed" && !PENDING_TYPES.has(row.type),
       waiting: !row.done && PENDING_TYPES.has(row.type),
       first: row.first,
