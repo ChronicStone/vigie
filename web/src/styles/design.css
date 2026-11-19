@@ -120,7 +120,7 @@ input:focus{outline:none}
 .lbody{flex:1;min-height:0;display:flex}
 .ltable{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
 .lhead,.lrow{display:grid;align-items:center;column-gap:10px;padding:0 16px;grid-template-columns:var(--cols)}
-.logs{--cols:60px 8px 46px minmax(0,1fr) 62px}
+.logs{--cols:60px 8px 96px minmax(0,1fr) 62px}
 .lhead{flex:none;height:29px;font-size:11px;color:var(--t3);border-bottom:1px solid var(--line)}
 .lhead .r{text-align:right}
 .lscroll{flex:1;overflow:auto;min-height:0}
@@ -142,7 +142,7 @@ input:focus{outline:none}
 .lvd.error{background:var(--err)}
 .lv.error{color:var(--err)}
 .lv.warn{color:var(--warn)}
-.ls{font-size:12px;color:var(--t3);white-space:nowrap}
+.ls{font-size:12px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .lmsg{display:flex;align-items:baseline;gap:8px;min-width:0;white-space:nowrap;overflow:hidden}
 .lmsg .hd{flex:none;font-family:var(--evt);font-size:var(--evs);letter-spacing:var(--evl);font-weight:450}
 .mth{color:var(--t3);margin-right:5px}
@@ -406,7 +406,7 @@ body{background:var(--bgc)}
 .tok .o:hover{color:var(--hex-fff)}
 .lbar{border-bottom:0!important}
 .lvls button.on{background:var(--w-085);box-shadow:var(--hi)}
-.logs{--cols:60px 8px 46px minmax(0,1fr) 62px}
+.logs{--cols:60px 8px 96px minmax(0,1fr) 62px}
 .lhead{border-bottom:1px solid var(--line);padding:0 24px;color:var(--t4)}
 .lscroll{padding:5px 8px 8px}
 .lrow{padding:0 16px;border-radius:var(--rad-inner);border:0}

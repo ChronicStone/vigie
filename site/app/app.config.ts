@@ -21,9 +21,18 @@ export default defineAppConfig({
     logo: { alt: 'Vigie', light: '/logo-light.svg', dark: '/logo-dark.svg', favicon: '/favicon.svg', class: 'h-6 w-auto' },
   },
   ui: {
-    colors: { primary: 'coral', neutral: 'stone' },
+    colors: { primary: 'coral', neutral: 'slate' },
   },
-  socials: {
-    github: 'https://github.com/ChronicStone/vigie',
+  navigation: { sub: 'header' },
+  toc: {
+    title: 'On this page',
+    bottom: {
+      title: 'Community',
+      links: [
+        { icon: 'i-simple-icons-github', label: 'Star on GitHub', to: 'https://github.com/ChronicStone/vigie', target: '_blank' },
+        { icon: 'i-simple-icons-npm', label: 'Packages on npm', to: 'https://www.npmjs.com/org/vigiejs', target: '_blank' },
+        { icon: 'i-lucide-bug', label: 'Report an issue', to: 'https://github.com/ChronicStone/vigie/issues/new', target: '_blank' },
+      ],
+    },
   },
 })

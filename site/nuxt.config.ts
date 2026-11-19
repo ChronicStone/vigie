@@ -1,6 +1,13 @@
 export default defineNuxtConfig({
   extends: ['docus'],
   css: ['~/assets/css/main.css'],
+  // The landing is a night scene: the docs open in the same night, and the toggle still offers day.
+  colorMode: { preference: 'dark', fallback: 'dark' },
+  // The logos are SVG and need no resizing; Vercel's image service is not part of a static deploy.
+  image: { provider: 'none' },
+  ogImage: {
+    fonts: ['Funnel+Display:600', 'Geist:400', 'Geist:500'],
+  },
   site: {
     name: 'Vigie',
     url: 'https://vigie.chronicstone.dev',
@@ -16,6 +23,8 @@ export default defineNuxtConfig({
     prerender: {
       // The landing page is static HTML served at / by Vercel, so the crawl starts in the docs.
       routes: ['/docs/getting-started/introduction'],
+      // "/" is the hand-written landing, written by scripts/postbuild.mjs.
+      ignore: [/^\/$/],
       crawlLinks: true,
       failOnError: false,
     },

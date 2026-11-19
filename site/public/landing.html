@@ -236,6 +236,8 @@ code, .m { font-family: var(--mono); }
 .callout .r1 { display: flex; gap: 8px; font: 12px/1.3 var(--mono); color: var(--ink-3); white-space: nowrap; }
 .callout .r1 b { color: var(--tone); font-weight: 500; }
 .callout .r2 { margin-top: 4px; font-size: 13.5px; font-weight: 500; color: var(--ink); }
+/* Leaving is quick, so a callout fading out never sits under the next one. */
+.callout:not(.on) { transition-duration: 80ms; }
 .callout::after { content: ""; position: absolute; left: var(--stem, 50%); bottom: -14px; width: 2px; height: 14px; margin-left: -1px; background: var(--tone); opacity: .7; }
 .found { position: absolute; z-index: 3; left: 0; right: 0; bottom: 28px; pointer-events: none; }
 .found .wrap { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--ink-3); }
@@ -660,7 +662,7 @@ html.instant .search .caret { display: none; }
       <li><a href="/docs/features/mcp">MCP</a></li>
     </ul>
     <div class="end">
-      <button class="search" type="button" aria-label="Search the docs"><svg aria-hidden="true"><use href="#i-search"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
+      <button class="search" type="button" aria-label="Search the docs" onclick="location.href='/docs/getting-started/introduction?search'"><svg aria-hidden="true"><use href="#i-search"/></svg><span>Search docs</span><kbd>⌘K</kbd></button>
       <a class="ib" href="https://github.com/ChronicStone/vigie" aria-label="Vigie on GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
       <a class="btn pri sm" href="/docs/getting-started/introduction">Get started</a>
     </div>
@@ -1433,16 +1435,41 @@ const sea = Watch($("#sea"), {
   lines: 30, finds: FINDS, still: deep, stillTime: 4, aim: 0,
   onFrame(finds) {
     const now = performance.now(), hw = hero.clientWidth, placed = [];
+    // A phone or a short laptop screen shows at most three at once.
+    const most = hw < 700 || hero.clientHeight < 780 ? 3 : 6;
+    // The headline, the lede and the buttons stay readable: callouts keep below them.
+    const hr = hero.getBoundingClientRect(), cr = $(".hero .copyb").getBoundingClientRect();
+    const copy = { left: cr.left - hr.left - 12, right: cr.left - hr.left + Math.min(cr.width, 760) + 12, bottom: cr.bottom - hr.top + 14 };
+    const overCopy = (x, w, top) => x + w / 2 > copy.left && x - w / 2 < copy.right && top < copy.bottom;
+    // Callouts still fading out count as taken space until they are gone.
+    const fading = [...hero.querySelectorAll(".callout:not(.on)")].filter((e) => parseFloat(getComputedStyle(e).opacity) > 0.05).map((e) => {
+      const b = e.getBoundingClientRect(); return { x: b.left - hr.left + b.width / 2, w: b.width, top: b.top - hr.top, h: b.height };
+    });
+    const hits = (x, w, top, h) => [...placed, ...fading].find((r) => Math.abs(r.x - x) < (r.w + w) / 2 + 10 && top < r.top + r.h + 10 && r.top < top + h + 10);
     for (const f of [...finds].sort((x, y) => y.y - x.y)) {
       if (f.lit) { f.hold = now + 2400; markFound(f); }
-      const on = now < f.hold; f.el.classList.toggle("on", on);
-      if (on) {
-        const cw = f.el.offsetWidth, cx = Math.max(cw / 2 + 12, Math.min(hw - cw / 2 - 12, f.x));
-        const ch = f.el.offsetHeight; let top = f.y - 26;
-        for (let n = 0; n < 4; n++) { const hit = placed.find((r) => Math.abs(r.x - cx) < (r.w + cw) / 2 + 8 && Math.abs(r.top - top) < ch + 8); if (!hit) break; top = hit.top - ch - 10; }
-        placed.push({ x: cx, w: cw, top });
-        f.el.style.left = cx + "px"; f.el.style.top = top + "px"; f.el.style.setProperty("--stem", (f.x - cx + cw / 2) + "px");
+      // Decide first, then switch once: toggling to measure would restart the fade every frame.
+      let show = false;
+      if (now < f.hold) {
+        const cw = f.el.offsetWidth, ch = f.el.offsetHeight;
+        const cx = Math.max(cw / 2 + 12, Math.min(hw - cw / 2 - 12, f.x));
+        let top = f.y - ch - 18;
+        if (overCopy(cx, cw, top)) top = copy.bottom;
+        // Stack upward while there is room, else below the one it hits.
+        for (let n = 0; n < 6; n++) {
+          const hit = hits(cx, cw, top, ch); if (!hit) break;
+          const up = hit.top - ch - 10;
+          top = up > 8 && !overCopy(cx, cw, up) ? up : hit.top + hit.h + 10;
+        }
+        // No free spot left: this one waits rather than cover another (a phone fits fewer at once).
+        show = placed.length < most && !hits(cx, cw, top, ch) && top + ch <= hero.clientHeight - 48;
+        if (show) {
+          placed.push({ x: cx, w: cw, top, h: ch });
+          // .callout is drawn above its anchor (translate -100%): style.top is its bottom edge.
+          f.el.style.left = cx + "px"; f.el.style.top = top + ch + "px"; f.el.style.setProperty("--stem", (f.x - cx + cw / 2) + "px");
+        }
       }
+      if (f.el.classList.contains("on") !== show) f.el.classList.toggle("on", show);
     }
   },
 });
@@ -1645,6 +1672,9 @@ function redact() {
 redIn.addEventListener("input", redact); redact();
 
 /* ---------------- Start ---------------- */
+addEventListener("keydown", (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); location.href = "/docs/getting-started/introduction?search"; }
+});
 $$(".tabs[data-group]").forEach((list) => {
   const group = list.dataset.group;
   const tabs = [...list.querySelectorAll(".tab")];
